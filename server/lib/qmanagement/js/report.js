@@ -33,6 +33,7 @@ Report.prototype = {
             self.transport.close();
             
             // exit early if there's an error
+            logme.debug(JSON.stringify(response));
             if(error) { 
                 logme.error(error);
                 return done(error, null);

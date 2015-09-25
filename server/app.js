@@ -4,13 +4,20 @@ var express = require('express'),
     compress = require('compression')(),
     path = require('path');
 
-console.log(__dirname);
+var pub = path.join(__dirname,'/public');
 
+// setup middleware
 app.use(compress)
-   .use(express.static(path.join(__dirname,'../client')))
-   .use(bodyParser.json());
+   .use(bodyParser.json())
+   .use(express.static(pub));
 
-require('./router')(app);
+// setup renderer
+app.set('view engine', 'jade')
+   .set('views', __dirname); // default dir is 'views'
+
+// include router
+require('./lib/router')(app);
 
 // Start server
 app.listen(80);
+	

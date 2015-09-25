@@ -42,7 +42,8 @@ module.exports = function(req, res, next) {
                 function() {
                     // Close the smtp connection pool
                     novellTransport.close();
-                    report.send(done);
+                    done();
+                    // report.send(done);
                     // report.sendReport(notifyTransport, done);
                 }
             );

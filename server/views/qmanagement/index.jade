@@ -1,0 +1,328 @@
+extends ../layout.jade
+
+block title
+	title qmanagement
+
+block css
+	include ./includes/css.jade
+
+block content
+	#page blurMe.main
+		.row.clearfix
+		.col-md-3.column
+			#credentials.panel.panel-alizarin
+			.panel-heading
+				h3.panel-title
+				i.glyphicon.glyphicon-user.space-right
+				| Novell
+				| Login
+			.panel-body
+				form
+				.form-group
+					.input-group.add-on
+					input#userid.form-control(type="text", placeholder="User ID", required="")
+					.input-group-btn
+						button.btn.btn-default.glyphicon.glyphicon-refresh(style="font-style: italic", type="submit")
+				.form-group
+					input#password.form-control(type="password", placeholder="Password")
+				.form-group
+					label(for="exampleInputEmail1")
+					| Send
+					| From
+					br
+					.btn-group.btn-toggle(data-toggle="buttons")
+					label.btn.btn-primary.active(data-toggle="fromUserSwitch")
+						input(type="radio", name="fromUser")
+						| {{formData.engineer}}@novell.com
+					label.btn.btn-default(data-toggle="fromUserSwitch")
+						input(type="radio", name="fromUser")
+						| support@novell.com
+				.form-group
+					label CC Siebel Support
+					br
+					.btn-group
+					label.btn.btn-success Nope!
+					label.btn.btn-success Public
+					label.btn.btn-success Internal
+				.form-group
+					.checkbox
+					label
+						input#rememberMe(type="checkbox")
+						| Remember Me
+				div
+					input(type="submit", style="display: none")
+		#messageContent.col-md-9.column
+			.panel.panel-asbestos
+			.panel-heading
+				h3.panel-title
+				i.glyphicon.glyphicon-list.space-right
+				| Message
+				| / Signature
+			.panel-body
+				#tabs-187873.tabbable
+				ul.nav.nav-tabs
+					li.active
+					a(data-toggle="tab", href="#panel-1") Content
+					li
+					a(data-toggle="tab", href="#panel-2") Signature
+				.tab-content
+					#panel-1.tab-pane.active
+					.quill-wrapper
+						#toolbar-content.toolbar-container
+						select.ql-font(title="Font")
+							option(selected="selected", value="Arial, san-serif")
+							| Arial
+							option(value="sans-serif")
+							| Sans Serif
+							option(value="Georgia, serif")
+							| Serif
+							option(value="Courier New, 'Monaco', monospace")
+							| Courier New
+						select.ql-size(title="Size")
+							option(value="10px")
+							| Small
+							option(selected="selected", value="12px")
+							| Normal
+							option(value="16px")
+							| Large
+							option(value="24px")
+							| Huge
+						span.ql-format-group
+							span.ql-format-button.ql-bold(title="Bold")
+							span.ql-format-separator
+							span.ql-format-button.ql-italic(title="Italic")
+							span.ql-format-separator
+							span.ql-format-button.ql-underline(title="Underline")
+						span.ql-format-group
+							select.ql-color(title="Text Color")
+							option(selected="selected", value="rgb(0, 0, 0)")
+							option(value="rgb(230, 0, 0)")
+							option(value="rgb(255, 153, 0)")
+							option(value="rgb(255, 255, 0)")
+							option(value="rgb(0, 138, 0)")
+							option(value="rgb(0, 102, 204)")
+							option(value="rgb(153, 51, 255)")
+							option(value="rgb(255, 255, 255)")
+							option(value="rgb(250, 204, 204)")
+							option(value="rgb(255, 235, 204)")
+							option(value="rgb(255, 255, 204)")
+							option(value="rgb(204, 232, 204)")
+							option(value="rgb(204, 224, 245)")
+							option(value="rgb(235, 214, 255)")
+							option(value="rgb(187, 187, 187)")
+							option(value="rgb(240, 102, 102)")
+							option(value="rgb(255, 194, 102)")
+							option(value="rgb(255, 255, 102)")
+							option(value="rgb(102, 185, 102)")
+							option(value="rgb(102, 163, 224)")
+							option(value="rgb(194, 133, 255)")
+							option(value="rgb(136, 136, 136)")
+							option(value="rgb(161, 0, 0)")
+							option(value="rgb(178, 107, 0)")
+							option(value="rgb(178, 178, 0)")
+							option(value="rgb(0, 97, 0)")
+							option(value="rgb(0, 71, 178)")
+							option(value="rgb(107, 36, 178)")
+							option(value="rgb(68, 68, 68)")
+							option(value="rgb(92, 0, 0)")
+							option(value="rgb(102, 61, 0)")
+							option(value="rgb(102, 102, 0)")
+							option(value="rgb(0, 55, 0)")
+							option(value="rgb(0, 41, 102)")
+							option(value="rgb(61, 20, 102)")
+							span.ql-format-separator
+							select.ql-background(title="Background Color")
+							option(value="rgb(0, 0, 0)")
+							option(value="rgb(230, 0, 0)")
+							option(value="rgb(255, 153, 0)")
+							option(value="rgb(255, 255, 0)")
+							option(value="rgb(0, 138, 0)")
+							option(value="rgb(0, 102, 204)")
+							option(value="rgb(153, 51, 255)")
+							option(selected="selected", value="rgb(255, 255, 255)")
+							option(value="rgb(250, 204, 204)")
+							option(value="rgb(255, 235, 204)")
+							option(value="rgb(255, 255, 204)")
+							option(value="rgb(204, 232, 204)")
+							option(value="rgb(204, 224, 245)")
+							option(value="rgb(235, 214, 255)")
+							option(value="rgb(187, 187, 187)")
+							option(value="rgb(240, 102, 102)")
+							option(value="rgb(255, 194, 102)")
+							option(value="rgb(255, 255, 102)")
+							option(value="rgb(102, 185, 102)")
+							option(value="rgb(102, 163, 224)")
+							option(value="rgb(194, 133, 255)")
+							option(value="rgb(136, 136, 136)")
+							option(value="rgb(161, 0, 0)")
+							option(value="rgb(178, 107, 0)")
+							option(value="rgb(178, 178, 0)")
+							option(value="rgb(0, 97, 0)")
+							option(value="rgb(0, 71, 178)")
+							option(value="rgb(107, 36, 178)")
+							option(value="rgb(68, 68, 68)")
+							option(value="rgb(92, 0, 0)")
+							option(value="rgb(102, 61, 0)")
+							option(value="rgb(102, 102, 0)")
+							option(value="rgb(0, 55, 0)")
+							option(value="rgb(0, 41, 102)")
+							option(value="rgb(61, 20, 102)")
+							span.ql-format-separator
+							select.ql-align(title="Text Alignment")
+							option(selected="selected", value="left")
+							option(value="center")
+							option(value="right")
+							option(value="justify")
+						span.ql-format-group
+							span.ql-format-button.ql-link(title="Link")
+							span.ql-format-separator
+							span.ql-format-button.ql-image(title="Image")
+							span.ql-format-separator
+							span.ql-format-button.ql-list(title="List")
+							span.ql-format-button.ql-bullet(title="Bullet")
+						#content.editor-container
+					#panel-2.tab-pane
+					.quill-wrapper
+						#toolbar-signature.toolbar-container
+						select.ql-font(title="Font")
+							option(selected="selected", value="sans-serif")
+							| Sans Serif
+							option(value="Georgia, serif")
+							| Serif
+							option(value="Courier New, 'Monaco', monospace")
+							| Courier New
+						select.ql-size(title="Size")
+							option(value="10px")
+							| Small
+							option(selected="selected", value="13px")
+							| Normal
+							option(value="18px")
+							| Large
+							option(value="32px")
+							| Huge
+						span.ql-format-group
+							span.ql-format-button.ql-bold(title="Bold")
+							span.ql-format-separator
+							span.ql-format-button.ql-italic(title="Italic")
+							span.ql-format-separator
+							span.ql-format-button.ql-underline(title="Underline")
+						span.ql-format-group
+							select.ql-color(title="Text Color")
+							option(selected="selected", value="rgb(0, 0, 0)")
+							option(value="rgb(230, 0, 0)")
+							option(value="rgb(255, 153, 0)")
+							option(value="rgb(255, 255, 0)")
+							option(value="rgb(0, 138, 0)")
+							option(value="rgb(0, 102, 204)")
+							option(value="rgb(153, 51, 255)")
+							option(value="rgb(255, 255, 255)")
+							option(value="rgb(250, 204, 204)")
+							option(value="rgb(255, 235, 204)")
+							option(value="rgb(255, 255, 204)")
+							option(value="rgb(204, 232, 204)")
+							option(value="rgb(204, 224, 245)")
+							option(value="rgb(235, 214, 255)")
+							option(value="rgb(187, 187, 187)")
+							option(value="rgb(240, 102, 102)")
+							option(value="rgb(255, 194, 102)")
+							option(value="rgb(255, 255, 102)")
+							option(value="rgb(102, 185, 102)")
+							option(value="rgb(102, 163, 224)")
+							option(value="rgb(194, 133, 255)")
+							option(value="rgb(136, 136, 136)")
+							option(value="rgb(161, 0, 0)")
+							option(value="rgb(178, 107, 0)")
+							option(value="rgb(178, 178, 0)")
+							option(value="rgb(0, 97, 0)")
+							option(value="rgb(0, 71, 178)")
+							option(value="rgb(107, 36, 178)")
+							option(value="rgb(68, 68, 68)")
+							option(value="rgb(92, 0, 0)")
+							option(value="rgb(102, 61, 0)")
+							option(value="rgb(102, 102, 0)")
+							option(value="rgb(0, 55, 0)")
+							option(value="rgb(0, 41, 102)")
+							option(value="rgb(61, 20, 102)")
+							span.ql-format-separator
+							select.ql-background(title="Background Color")
+							option(value="rgb(0, 0, 0)")
+							option(value="rgb(230, 0, 0)")
+							option(value="rgb(255, 153, 0)")
+							option(value="rgb(255, 255, 0)")
+							option(value="rgb(0, 138, 0)")
+							option(value="rgb(0, 102, 204)")
+							option(value="rgb(153, 51, 255)")
+							option(selected="selected", value="rgb(255, 255, 255)")
+							option(value="rgb(250, 204, 204)")
+							option(value="rgb(255, 235, 204)")
+							option(value="rgb(255, 255, 204)")
+							option(value="rgb(204, 232, 204)")
+							option(value="rgb(204, 224, 245)")
+							option(value="rgb(235, 214, 255)")
+							option(value="rgb(187, 187, 187)")
+							option(value="rgb(240, 102, 102)")
+							option(value="rgb(255, 194, 102)")
+							option(value="rgb(255, 255, 102)")
+							option(value="rgb(102, 185, 102)")
+							option(value="rgb(102, 163, 224)")
+							option(value="rgb(194, 133, 255)")
+							option(value="rgb(136, 136, 136)")
+							option(value="rgb(161, 0, 0)")
+							option(value="rgb(178, 107, 0)")
+							option(value="rgb(178, 178, 0)")
+							option(value="rgb(0, 97, 0)")
+							option(value="rgb(0, 71, 178)")
+							option(value="rgb(107, 36, 178)")
+							option(value="rgb(68, 68, 68)")
+							option(value="rgb(92, 0, 0)")
+							option(value="rgb(102, 61, 0)")
+							option(value="rgb(102, 102, 0)")
+							option(value="rgb(0, 55, 0)")
+							option(value="rgb(0, 41, 102)")
+							option(value="rgb(61, 20, 102)")
+							span.ql-format-separator
+							select.ql-align(title="Text Alignment")
+							option(selected="selected", value="left")
+							option(value="center")
+							option(value="right")
+							option(value="justify")
+						span.ql-format-group
+							span.ql-format-button.ql-link(title="Link")
+							span.ql-format-separator
+							span.ql-format-button.ql-image(title="Image")
+							span.ql-format-separator
+							span.ql-format-button.ql-list(title="List")
+							span.ql-format-button.ql-bullet(title="Bullet")
+						#signature.editor-container
+				.col-md-12.column(style="margin-top: 20px")
+				.btn-group.pull-left
+					button.btn.btn-primary.dropdown-toggle(data-toggle="dropdown", type="button")
+					| Template
+					span.caret
+					ul.dropdown-menu
+					li
+						a {{template.name}}
+					li.divider
+					li.dropdown-submenu
+						a(href="#", tabindex="-1") More..
+						ul.dropdown-menu
+						li
+							a {{template.name}}
+							ul.dropdown-menu
+							li
+								a {{item.name}}
+				button#sendMail.btn.btn-success.btn-default.pull-right(type="button") Send
+				button.btn.btn-default.pull-right(style="margin-right:20px") Preview
+		.row.clearfix
+		.col-md-12.column
+			.panel.panel-midnightblue
+			.panel-heading
+				h3.panel-title
+				i.glyphicon.glyphicon-cloud-download.space-right
+				| Service Requests
+				i.glyphicon.glyphicon-refresh.pull-right.pointer
+			#srContent.panel-body
+				.table.table-hover.table-condensed
+
+block js
+	include ./includes/js.jade

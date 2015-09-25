@@ -13,7 +13,8 @@ module.exports = function sendMail(mail, callback) {
 
         var message,
             mailInfo = '<b>To: </b>' + mail.mailOptions.to + ' <b>Cc: </b>' + mail.mailOptions.cc +' <b>From: </b>' + mail.mailOptions.from + ' <b>Subject: </b>' + mail.mailOptions.subject;
-            
+        logme.debug(JSON.stringify(error, response)); 
+        logme.debug(JSON.stringify(mail));   
         if(error){
             mail.mailOptions.err = true;
             mail.mailOptions.res = error.name;

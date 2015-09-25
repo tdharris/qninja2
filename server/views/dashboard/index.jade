@@ -1,0 +1,137 @@
+extends ../layout.jade
+
+block title
+	title dashboard
+
+block css
+	include ./includes/css.jade
+
+block content
+	.row-fluid
+		// Dashboard
+		.col-md-12.col-lg-4
+			#accordion.panel-group
+				.panel.panel-default
+					.panel-heading
+						a.accordion-toggle(data-toggle='collapse', href='#collapseOne')
+							i.fa.fa-home
+							h3 tharris
+							i.glyphicon.glyphicon-chevron-down.pull-right
+						a.install.pull-right(href='files/workPluginsTyler.zip')
+							i.fa.fa-cloud-download
+					#collapseOne.panel-collapse.collapse.in
+						.panel-body
+							// TOP-ROW Section
+							.row-fluid
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.blue-steelblue Services
+										li.full
+											a.ripplelink(href='ftp://tharris1.lab.novell.com', target='_blank') FTP
+										//
+											<li class="full">
+																																			<a href="https://snielson17.lab.novell.com/qNinja/" target="_blank">qNinja</a>
+																																	</li>
+										li.full
+											a(href='https://tharris6.lab.novell.com/nps/servlet/portal?render=on', target='_blank') NetIQ iManager
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.red-chesnutrose nPum 3.0
+										li.full
+											a(href='https://tharris5.lab.novell.com', target='_blank') Manager
+										li.full
+											a(href='https://tharris5.lab.novell.com/myaccess/', target='_blank') My Access
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.green-jade dchenworth
+										// purple-honeyflower,  green-jade, green-emerald
+										li.full
+											a(href='https://dchenworth8.lab.novell.com:8006', target='_blank') Proxmox
+										li.full
+											a(href='https://dchenworth2.lab.novell.com', target='_blank') Manager
+							// REMOTE ACCESS Section
+							.row-fluid
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.black Remote Access
+										li.full
+											a(href='ssh://tharris1.lab.novell.com/root:novell') t1: ubu-dev
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.black Remote Access
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://tharris5.lab.novell.com/root:novell') t5: ma-sles11
+											a.col-md-2.col-xs-2(href='vnc://tharris5.lab.novell.com:5901')
+												i.center.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://tharris6.lab.novell.com/root:novell') t6: ag-oes11
+											a.col-md-2.col-xs-2(href='vnc://tharris6.lab.novell.com:5901')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://tharris7.lab.novell.com/root:novell') t7: ag-sles12
+											a.col-md-2.col-xs-2(href='vnc://tharris7.lab.novell.com:5901')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='rdp-tdh://t8.rdp') t8: ag-win2008
+											a.col-md-2.col-xs-2(href='rdp-tdh://t8.RDP')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='rdp-tdh://t9.rdp') t9: ag-win2012
+											a.col-md-2.col-xs-2(href='rdp-tdh://t9.RDP')
+												i.fa.fa-laptop
+										li.row
+											a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://tharris10.lab.novell.com/root:novell123') t10: ag-redhat6
+										li.row
+											a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://tharris11.lab.novell.com/root:novell123') t11: ag-redhat7
+										li.row
+											a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://tharris12.lab.novell.com/root:novell') t12: ag-aix6
+										li.row
+											a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://tharris13.lab.novell.com/root:novell') t13: ag-aix7
+								.col-md-4.nopadding
+									ul.list
+										li(style='list-style: none; display: inline')
+											h2.black Remote Access
+											//
+												<li>
+																																						<a href="http://tharris1.lab.novell.com" target="_blank">VMware WSX</a>
+																																				</li>
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://dchenworth1.lab.novell.com/root:novell') d1: oes-11
+											a.col-md-2.col-xs-2(href='vnc://dchenworth1.lab.novell.com:5901')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://tharris6.lab.novell.com/root:novell') d2: centos-6.4
+											a.col-md-2.col-xs-2(href='vnc://tharris6.lab.novell.com:5901')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-10.col-xs-10(href='ssh://tharris7.lab.novell.com/root:novell') d3: iFolder
+											a.col-md-2.col-xs-2(href='vnc://tharris7.lab.novell.com:5901')
+												i.fa.fa-laptop
+										li.row
+											a.col-md-12.col-xs-12(href='ssh://tharris8.lab.novell.com/root:novell') d4: Ubuntu Agent
+										li.row
+											a.col-md-10.col-xs-10(href='rdp://tharris9.lab.novell.com/Novell123.pw') d5: Windows Agent
+											a.col-md-2.col-xs-2(href='rdp://tharris9.lab.novell.com/Novell123.pw')
+												i.fa.fa-laptop
+		// Queue
+		.col-sm-12.col-lg-8
+			#accordion.panel-group
+				.panel.panel-default
+					.panel-heading
+						a.accordion-toggle(data-toggle='collapse', href='#queue')
+							i.fa.fa-hourglass-half
+							h3 Queue
+							i.glyphicon.glyphicon-chevron-down.pull-right
+						a.install.pull-right(href='https://prod11i.innerweb.novell.com/pls/apex/f?p=125:5001:31166590036566::NO:RP::', target='_blank')
+							i.fa.fa-external-link-square
+					#queue.panel-collapse.collapse.in
+						.panel-body
+							iframe(sandbox='allow-same-origin allow-scripts allow-popups allow-forms', seamless='seamless', src='https://prod11i.innerweb.novell.com/pls/apex/f?p=125:5001:31166590036566::NO:RP::')
+
+block js
+	include ./includes/js.jade
