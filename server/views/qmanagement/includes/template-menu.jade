@@ -1,0 +1,17 @@
+// Single button
+.btn-group.pull-left
+  button.btn.btn-primary.dropdown-toggle(type="button", data-toggle="dropdown")
+    | Template
+    span.caret
+  ul.dropdown-menu(role="menu", aria-labelledby="dropdownMenu")
+    li(ng-repeat="template in templates.general")
+      a(ng-click="handleTemplate(template)") {{template.name}}
+    li.divider
+    li.dropdown-submenu
+      a(tabindex="-1", href="#") More..
+      ul.dropdown-menu
+        li(ng-repeat="template in templates.special", ng-class="{'dropdown-submenu': template.items.length > 0 }")
+          a(ng-click="handleTemplate(template)") {{template.name}}
+          ul.dropdown-menu(ngif="template.submenu")
+            li(ng-repeat="item in template.items")
+              a(ng-click="handleTemplate(item)") {{item.name}}
