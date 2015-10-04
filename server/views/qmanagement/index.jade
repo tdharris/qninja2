@@ -16,7 +16,7 @@ block content
               .panel-heading
                 h3.panel-title
                   i.glyphicon.glyphicon-user.space-right
-                  h3 SMTP Login
+                  h3 Login
               .panel-body
                 form(ng-submit="getServiceRequests()")
                   .form-group
@@ -38,12 +38,23 @@ block content
                         input(type="radio", name="fromUser")
                         | support@novell.com
                   .form-group
-                    label CC Siebel Support
+                    label CC
                     br
-                    .btn-group
-                      label.btn.btn-success(ng-model="formData.ccSupport", btn-radio="''") Nope!
-                      label.btn.btn-success(ng-model="formData.ccSupport", btn-radio="'support@novell.com'") Public
-                      label.btn.btn-success(ng-model="formData.ccSupport", btn-radio="'support_internal@novell.com'") Internal
+                    select#cc.btn.input-large.input-dark(name='cc')
+                      option(ng-model="formData.ccSupport") None
+                      option(ng-model="formData.ccSupport") support@novell.com
+                      option(ng-model="formData.ccSupport") support_internal@novell.com
+                    select#activityCode.btn.input-small.input-dark(name='activityCode')
+                      option(ng-model="formData.activityCode") +EO
+                      option(ng-model="formData.activityCode") +SS
+                    //- .input-group
+                    //-   .btn-group(data-toggle='buttons')
+                    //-     label.btn.btn-default.active
+                    //-       input#option1(type='radio', checked='checked', name='options')
+                    //-       |  Yes
+                    //-     label.btn.btn-default
+                    //-       input#option2(type='radio', name='options')
+                    //-       |  No
                   .form-group
                     .checkbox
                       label
@@ -51,28 +62,33 @@ block content
                         | Remember Me
                   div
                     input(type="submit", style="display: none;")
+                  
+                  <hr>
+                  button.btn.btn-default.btn-block(ng-click="open('lg')", style="margin-right:20px") Preview
+                  button#sendMail.btn.btn-success.btn-default.btn-block(ng-click="sendMail()", type="button") Send
           #messageContent.col-md-9.column
             .panel.panel-dark
               .panel-heading
                 h3.panel-title
                   i.glyphicon.glyphicon-list.space-right
-                  h3 Message / Signature
+                  h3 Content
               .panel-body
                 #tabs-187873.tabbable
-                  ul.nav.nav-tabs
+                  ul.nav.nav-tabs.nav-tabs-dark
                     li.active
                       a(href="#panel-1", data-toggle="tab") Content
                     li
                       a(href="#panel-2", data-toggle="tab") Signature
                   .tab-content
                     #panel-1.tab-pane.active
-                      include ./includes/quill-content.jade
+                      text-angular(ng-model='editorContent')
                     #panel-2.tab-pane
-                      include ./includes/quill-signature.jade
+                      text-angular(ng-model='editorSignature')
+                      //- include ./includes/quill-signature.jade
                 .col-md-12.column(style="margin-top: 20px;")
-                  include ./includes/template-menu.jade
-                  button#sendMail.btn.btn-success.btn-default.pull-right(ng-click="sendMail()", type="button") Send
-                  button.btn.btn-default.pull-right(ng-click="open('lg')", style="margin-right:20px") Preview
+                  //- include ./includes/template-menu.jade
+                  //- button#sendMail.btn.btn-success.btn-default.pull-right(ng-click="sendMail()", type="button") Send
+                  //- button.btn.btn-default.pull-right(ng-click="open('lg')", style="margin-right:20px") Preview
         .row.clearfix
           .col-md-12.column
             .panel.panel-dark
@@ -82,7 +98,7 @@ block content
                   h3 Service Requests
                   i.glyphicon.glyphicon-refresh.pull-right.pointer(ng-click="getServiceRequests()")
               #srContent.panel-body
-                .gridStyle(ng-grid="gridOptions")
+                .gridStyle(ui-grid="gridOptions" ui-grid-edit ui-grid-selection ui-grid-auto-resize)
 
 block js
   include ./includes/js.jade

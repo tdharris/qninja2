@@ -1,7 +1,38 @@
 
-var myApp = angular.module('myApp', ['ngGrid', 'LocalStorageModule', 'ui.bootstrap']);
+var myApp = angular.module('myApp', [
+	'ui.grid',
+	'ui.grid.edit',
+	'ui.grid.selection',
+	'ui.grid.autoResize',
+	'LocalStorageModule',
+	'textAngular'
+]);
 
-myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', function($scope,$http,localStorageService,$modal) {
+// myApp.config(function($provide) {
+
+// 	// this demonstrates how to register a new tool and add it to the default toolbar
+// 	$provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) { // $delegate is the taOptions we are decorating
+// 	    taRegisterTool('test', {
+// 	        buttontext: 'Test',
+// 	        action: function() {
+// 	            alert('Test Pressed')
+// 	        }
+// 	    });
+// 	    taOptions.toolbar[1].push('test');
+// 	    taRegisterTool('colourRed', {
+// 	        iconclass: "fa fa-square red",
+// 	        action: function() {
+// 	            this.$editor().wrapSelection('forecolor', 'red');
+// 	        }
+// 	    });
+// 	    // add the button to the default toolbar definition
+// 	    taOptions.toolbar[1].push('colourRed');
+// 	    return taOptions;
+// 	}]);
+
+// });
+
+myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($scope,$http, localStorageService) {
 	
 	$scope.selectedRows=[];
 	$scope.formData = {
@@ -27,7 +58,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', 
 			}
 
 			// if ($scope.formData.engineer !== undefined) $scope.getServiceRequests();
-			if ($scope.formData.signature !== undefined) $scope.editorSignature.setHTML($scope.formData.signature);
+			if ($scope.formData.signature !== undefined) $scope.editorSignature = $scope.formData.signature;
 			$scope.srContent = document.getElementById('spinner');
 
 		}
@@ -194,35 +225,35 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', 
 	};
 
 	// Initialize editor with custom theme and modules
-	$scope.editorContent = new Quill('#content', {
-		modules: {
-			'toolbar': { container: '#toolbar-content' },
-			'link-tooltip': true,
-			'image-tooltip': true
-		},
-		styles: {
-			'body': {
-				'font-family': "'Arial', san-serif",
-				'font-size': "12px"
-			}
-		},
-		theme: 'snow'
-	});
+	// $scope.editorContent = new Quill('#content', {
+	// 	modules: {
+	// 		'toolbar': { container: '#toolbar-content' },
+	// 		'link-tooltip': true,
+	// 		'image-tooltip': true
+	// 	},
+	// 	styles: {
+	// 		'body': {
+	// 			'font-family': "'Arial', san-serif",
+	// 			'font-size': "12px"
+	// 		}
+	// 	},
+	// 	theme: 'snow'
+	// });
 
-	$scope.editorSignature = new Quill('#signature', {
-		modules: {
-			'toolbar': { container: '#toolbar-signature' },
-			'link-tooltip': true,
-			'image-tooltip': true
-		},
-		styles: {
-			'body': {
-				'font-family': "'Arial', san-serif",
-				'font-size': "12px"
-			}
-		},
-		theme: 'snow'
-	});
+	// $scope.editorSignature = new Quill('#signature', {
+	// 	modules: {
+	// 		'toolbar': { container: '#toolbar-signature' },
+	// 		'link-tooltip': true,
+	// 		'image-tooltip': true
+	// 	},
+	// 	styles: {
+	// 		'body': {
+	// 			'font-family': "'Arial', san-serif",
+	// 			'font-size': "12px"
+	// 		}
+	// 	},
+	// 	theme: 'snow'
+	// });
 
 	$scope.setFromUser = function(boolean){
 		$scope.formData.fromUser = boolean;
@@ -271,7 +302,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', 
 	$scope.gridOptions = {
 		data: 'myData',
 		checkboxHeaderTemplate: '<input class="ngSelectionHeader" type="checkbox" ng-model="allSelected" ng-change="toggleSelectAll(allSelected)"/>',
-		plugins: [new ngGridFlexibleHeightPlugin()],
+		plugins: [],
 		selectedItems: $scope.selectedRows,
 		enableRowSelection: true,
 		enableCellEditOnFocus: true,
@@ -280,41 +311,43 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', 
 		showFilter:true,
 		showColumnMenu: true,
 		showFooter: true,
-		columnDefs: [{field: 'CREATEDON', displayName: 'Created On', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
-								 {field: 'SR', displayName: 'SR', enableCellEdit: false, width:'**'},
-								 {field: 'CUSTOMERNAME', displayName: 'Name', enableCellEdit: false, width:'***'},
-								 {field: 'PRIMARYEMAIL', displayName: 'Primary', enableCellEdit: true, width:'****'},
-								 {field: 'ALTERNATECONTACT', displayName: 'Alternate', enableCellEdit: true, width:'****'},
-								 {field: 'STATUS', displayName: 'Status', enableCellEdit: false, width:'***'},
-								 {field: 'BRIEF', displayName: 'Brief Description', enableCellEdit: true, width:'********'},
-								 {field: 'LASTACTIVITYDATE', displayName: 'Date', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
-								 {field: 'LASTACTIVITY', displayName: 'Last Activity', enableCellEdit: true, width:'**********', cellTemplate:'<div><div class="ngCellText" tooltip="{{row.getProperty(col.field)}}" tooltip-append-to-body="true">{{row.getProperty(col.field)}}</div></div>'}],
+		columnDefs: [
+			{field: 'CREATEDON', displayName: 'Created On', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
+			{field: 'SR', displayName: 'SR', enableCellEdit: false, width:'**'},
+			{field: 'CUSTOMERNAME', displayName: 'Name', enableCellEdit: false, width:'***'},
+			{field: 'PRIMARYEMAIL', displayName: 'Primary', enableCellEdit: true, width:'****'},
+			{field: 'ALTERNATECONTACT', displayName: 'Alternate', enableCellEdit: true, width:'****'},
+			{field: 'STATUS', displayName: 'Status', enableCellEdit: false, width:'***'},
+			{field: 'BRIEF', displayName: 'Brief Description', enableCellEdit: true, width:'********'},
+			{field: 'LASTACTIVITYDATE', displayName: 'Date', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
+			{field: 'LASTACTIVITY', displayName: 'Last Activity', enableCellEdit: true, width:'**********', cellTemplate:'<div><div class="ngCellText" tooltip="{{grid.getCellValue(row,col)}}" tooltip-append-to-body="true">{{grid.getCellValue(row,col)}}</div></div>'}
+		],
 		sortInfo: { fields: ['LASTACTIVITYDATE'], directions: ['asc'] }
 	};
 
 	// angular-ui bootstrap modal
-	$scope.open = function (size) {
+	// $scope.open = function (size) {
 
-		preview = "<div class=\"modal-header\"><button type=\"button\" class=\"close\" ng-click=\"no()\">×</button><h4 class=\"modal-title ng-binding\"><span class=\"glyphicon glyphicon-check\"></span> Please Confirm</h4></div><div class=\"modal-body\">"+ $scope.editorContent.getHTML() + $scope.editorSignature.getHTML() +"</div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button><button class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button></div>";
+	// 	preview = "<div class=\"modal-header\"><button type=\"button\" class=\"close\" ng-click=\"no()\">×</button><h4 class=\"modal-title ng-binding\"><span class=\"glyphicon glyphicon-check\"></span> Please Confirm</h4></div><div class=\"modal-body\">"+ $scope.editorContent.getHTML() + $scope.editorSignature.getHTML() +"</div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button><button class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button></div>";
 
-		$scope.modalInstance = $modal.open({
-			template: preview,
-			controller: $scope.ModalInstanceCtrl
-		});
+	// 	// $scope.modalInstance = $modal.open({
+	// 	// 	template: preview,
+	// 	// 	controller: $scope.ModalInstanceCtrl
+	// 	// });
 
-	};
+	// };
 
-	$scope.ModalInstanceCtrl = function ($scope, $modalInstance) {
+	// $scope.ModalInstanceCtrl = function ($scope, $modalInstance) {
 
-		$scope.ok = function () {
-			$modalInstance.close();
-			// $scope.getServiceRequests();
-		};
+	// 	$scope.ok = function () {
+	// 		$modalInstance.close();
+	// 		// $scope.getServiceRequests();
+	// 	};
 
-		$scope.cancel = function () {
-			$modalInstance.dismiss();
-		};
-	};
+	// 	$scope.cancel = function () {
+	// 		$modalInstance.dismiss();
+	// 	};
+	// };
 
 	$scope.getServiceRequests = function() {
 
@@ -366,7 +399,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', '$modal', 
 					var res = JSON.stringify(data);
 					toastr.success(JSON.parse(res));
 					$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();
-					$scope.editorContent.setHTML('');
+					$scope.editorContent = '';
 					$scope.gridOptions.$gridScope.toggleSelectAll(false);
 				}).error(function (data, status, headers, config) {
 						toastr.error(headers);
