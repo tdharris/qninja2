@@ -98,7 +98,7 @@ block content
                   h3 Service Requests
                   i.glyphicon.glyphicon-refresh.pull-right.pointer(ng-click="getServiceRequests()")
               #srContent.panel-body
-                .gridStyle(ui-grid="gridOptions" ui-grid-edit ui-grid-selection ui-grid-auto-resize)
+                .grid(ui-grid="gridOptions" ui-grid-edit ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns ui-grid-move-columns ui-grid-pagination)
 
 block js
   include ./includes/js.jade

@@ -2,8 +2,11 @@
 var myApp = angular.module('myApp', [
 	'ui.grid',
 	'ui.grid.edit',
+	'ui.grid.resizeColumns',
 	'ui.grid.selection',
-	'ui.grid.autoResize',
+	'ui.grid.moveColumns',
+	'ui.grid.cellNav',
+	'ui.grid.pagination',
 	'LocalStorageModule',
 	'textAngular'
 ]);
@@ -298,19 +301,23 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		}).spin(target);
 
 	};
-	
+
 	$scope.gridOptions = {
 		data: 'myData',
-		checkboxHeaderTemplate: '<input class="ngSelectionHeader" type="checkbox" ng-model="allSelected" ng-change="toggleSelectAll(allSelected)"/>',
-		plugins: [],
 		selectedItems: $scope.selectedRows,
+		// infiniteScrollRowsFromEnd: 40,
+	 	// infiniteScrollUp: true,
+	 	// infiniteScrollDown: true,
+	 	paginationPageSizes: [25, 50, 75],
+    	paginationPageSize: 25,
+	 	enableSorting: true,
 		enableRowSelection: true,
 		enableCellEditOnFocus: true,
 		enableColumnResize: true,
 		enableColumnReordering: true,
-		showFilter:true,
-		showColumnMenu: true,
-		showFooter: true,
+		enableGridMenu: false,
+		showGridFooter: true,
+		enableHorizontalScrollbar: 0, 
 		columnDefs: [
 			{field: 'CREATEDON', displayName: 'Created On', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
 			{field: 'SR', displayName: 'SR', enableCellEdit: false, width:'**'},
@@ -320,7 +327,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 			{field: 'STATUS', displayName: 'Status', enableCellEdit: false, width:'***'},
 			{field: 'BRIEF', displayName: 'Brief Description', enableCellEdit: true, width:'********'},
 			{field: 'LASTACTIVITYDATE', displayName: 'Date', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
-			{field: 'LASTACTIVITY', displayName: 'Last Activity', enableCellEdit: true, width:'**********', cellTemplate:'<div><div class="ngCellText" tooltip="{{grid.getCellValue(row,col)}}" tooltip-append-to-body="true">{{grid.getCellValue(row,col)}}</div></div>'}
+			{field: 'LASTACTIVITY', displayName: 'Last Activity', enableCellEdit: true, width:'**********', cellTooltip: true }
 		],
 		sortInfo: { fields: ['LASTACTIVITYDATE'], directions: ['asc'] }
 	};
@@ -328,7 +335,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	// angular-ui bootstrap modal
 	// $scope.open = function (size) {
 
-	// 	preview = "<div class=\"modal-header\"><button type=\"button\" class=\"close\" ng-click=\"no()\">×</button><h4 class=\"modal-title ng-binding\"><span class=\"glyphicon glyphicon-check\"></span> Please Confirm</h4></div><div class=\"modal-body\">"+ $scope.editorContent.getHTML() + $scope.editorSignature.getHTML() +"</div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button><button class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button></div>";
+	// 	preview = "<div class=\"modal-header\"><button type=\"button\" class=\"close\" ng-click=\"no()\">×</button><h4 class=\"modal-title ng-binding\"><span class=\"glyphicon glyphicon-check\"></span> Please Confirm</h4></div><div class=\"modal-body\">"+ $scope.editorContent + $scope.editorSignature +"</div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button><button class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button></div>";
 
 	// 	// $scope.modalInstance = $modal.open({
 	// 	// 	template: preview,
@@ -366,12 +373,10 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 					item.CREATEDON = new Date(Date.parse(item.CREATEDON)); 
 					item.LASTACTIVITYDATE = new Date(Date.parse(item.LASTACTIVITYDATE)); 
 				});
-				console.log(body);
 				$scope.myData = body;
-				console.log($scope.myData);
 				toastr.success('Received Service Requests.');
 				$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();
-				$scope.gridOptions.$gridScope.toggleSelectAll(false);
+				// $scope.gridOptions.$gridScope.toggleSelectAll(false);
 			}).error(function (data, status, headers, config) {
 					toastr.error('Failed to retrieve service requests!');
 					console.error(data);
@@ -387,8 +392,8 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		} else {
 			$scope.spinIt('spinMe'); 
 			$scope.rememberMe();
-			$scope.formData.content = $scope.editorContent.getHTML();
-			$scope.formData.signature = $scope.editorSignature.getHTML();
+			$scope.formData.content = $scope.editorContent;
+			$scope.formData.signature = $scope.editorSignature;
 
 			$http({
 				url: 'sendMail',
@@ -400,7 +405,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 					toastr.success(JSON.parse(res));
 					$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();
 					$scope.editorContent = '';
-					$scope.gridOptions.$gridScope.toggleSelectAll(false);
+					// $scope.gridOptions.$gridScope.toggleSelectAll(false);
 				}).error(function (data, status, headers, config) {
 						toastr.error(headers);
 						console.error(data); 
@@ -418,7 +423,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 				localStorageService.set('engineer', $scope.formData.engineer);
 				localStorageService.set('password', $scope.formData.password);
 				localStorageService.set('fromUser', $scope.formData.fromUser);
-				localStorageService.set('signature', $scope.editorSignature.getHTML());
+				localStorageService.set('signature', $scope.editorSignature);
 			} else {
 				localStorageService.clearAll();
 			}
