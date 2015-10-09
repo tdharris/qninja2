@@ -1,0 +1,20 @@
+#messageContent.panel.panel-dark
+  .panel-heading
+    h3.panel-title
+      i.glyphicon.glyphicon-list.space-right
+      h3 Content
+  .panel-body
+    #tabs-187873.tabbable
+      ul.nav.nav-tabs.nav-tabs-dark
+        li.active
+          a(href="#panel-1", data-toggle="tab") Content
+        li
+          a(href="#panel-2", data-toggle="tab") Signature
+      .tab-content
+        #panel-1.tab-pane.active
+          text-angular(ng-model='editorContent')
+        #panel-2.tab-pane
+          text-angular(ng-model='editorSignature')
+          //- include ./includes/quill-signature.jade
+    .col-md-12.column(style="margin-top: 20px;")
+      //- include ./includes/template-menu.jade

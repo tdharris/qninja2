@@ -1,4 +1,4 @@
-var myUtil = require('./myUtil');
+var myUtil = require('../util');
 
 module.exports = function validate(addresses){
 

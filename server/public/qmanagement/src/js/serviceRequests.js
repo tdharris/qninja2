@@ -11,41 +11,17 @@ var myApp = angular.module('myApp', [
 	'textAngular'
 ]);
 
-// myApp.config(function($provide) {
-
-// 	// this demonstrates how to register a new tool and add it to the default toolbar
-// 	$provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) { // $delegate is the taOptions we are decorating
-// 	    taRegisterTool('test', {
-// 	        buttontext: 'Test',
-// 	        action: function() {
-// 	            alert('Test Pressed')
-// 	        }
-// 	    });
-// 	    taOptions.toolbar[1].push('test');
-// 	    taRegisterTool('colourRed', {
-// 	        iconclass: "fa fa-square red",
-// 	        action: function() {
-// 	            this.$editor().wrapSelection('forecolor', 'red');
-// 	        }
-// 	    });
-// 	    // add the button to the default toolbar definition
-// 	    taOptions.toolbar[1].push('colourRed');
-// 	    return taOptions;
-// 	}]);
-
-// });
-
 myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($scope,$http, localStorageService) {
 	
-	$scope.selectedRows=[];
 	$scope.formData = {
-		"engineer": undefined,
-		"password": undefined,
-		"fromUser": true,
-		"ccSupport": 'support@novell.com',
-		"emails": $scope.selectedRows,
-		"content": undefined,
-		"signature": undefined
+		'engineer': undefined,
+		'password': undefined,
+		'fromUser': true,
+		'ccSupport': 'support@novell.com',
+		'activityCode': '+EO',
+		'emails': '',
+		'content': undefined,
+		'signature': undefined
 	};
 
 	$scope.init = function(){
@@ -53,10 +29,21 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		if(localStorageService.isSupported){
 			$scope.formData.engineer = localStorageService.get("engineer"),
 			$scope.formData.password = localStorageService.get("password"),
-			$scope.formData.fromUser = localStorageService.get("fromUser"),
 			$scope.formData.signature = localStorageService.get("signature");
 
-			if($scope.formData.engineer || $scope.formData.password || $scope.formData.fromUser || $scope.formData.signature) {
+			var fromUser = localStorageService.get("fromUser"),
+				ccSupport = localStorageService.get("ccSupport"),
+				activityCode = localStorageService.get("activityCode");
+
+			if(fromUser !== null)
+				$scope.formData.fromUser = localStorageService.get("fromUser");
+			if(ccSupport !== null)
+				$scope.formData.ccSupport = localStorageService.get("ccSupport");
+			if(activityCode !== null)
+				$scope.formData.activityCode = localStorageService.get("activityCode");
+
+			if($scope.formData.engineer || $scope.formData.password || $scope.formData.fromUser || 
+				$scope.formData.ccSupport || $scope.formData.activityCode || $scope.formData.signature) {
 				document.getElementById('rememberMe').checked = true;
 			}
 
@@ -69,142 +56,6 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		$scope.blurMe = document.getElementById('blurMe');
 	};
 
-	// Templates: update view, create handle
-	$scope.templates = {
-
-		general: [
-			{
-				name: '*New SR',
-				selectMultiple: false,
-				snippet: ''
-			},
-			{
-				name: 'Bomgar Invitation',
-				selectMultiple: true,
-				snippet: "Are you available for a Bomgar session? \nYou can connect by either of the following: \nURL\nOr http://www.websupport.com and enter NUMBER as the session key."
-			},
-			{
-				name: 'EMEA',
-				selectMultiple: true,
-				snippet: "I see our timezones are very different. Are you available to work this issue now? I will keep this Service Request until the end of my shift. If I do not receive an email back from you, I'll go ahead and put this Service Request in the queue for the team in your timezone."
-			},
-			{
-				name: 'Follow-up',
-				selectMultiple: true,
-				snippet: "Just following up with you, as I haven't heard from you since my last email. What is the current status of this service request?"
-			},
-			{
-				name: 'Schedule to Close',
-				selectMultiple: true,
-				snippet: "Just checking in to verify the issue has been resolved. I'll be placing this SR in a Schedule to Close state. If I don't hear back from you, I'll go ahead and close the SR. Feel free to contact me."
-			},
-			{
-				name: 'Close',
-				selectMultiple: true,
-				snippet: "I'll be closing this Service Request. If the issue returns, feel free to contact me within 14 days and I will reopen the SR."
-			},
-			{
-				name: 'Support Config',
-				selectMultiple: true,
-				snippet: "Let's start by getting a support config. Most SLES Servers have the following tool by default.\n\nPlease execute the following command on the eDirectory server:\nsupportconfig -ur <SR#>\n\nThis will automatically upload the servers configuration information and attach it to the SR."
-			}
-		],
-		special: [
-			{
-				name: 'GroupWise',
-				selectMultiple: true,
-				snippet: '',
-				items: [
-					{
-						name: 'POA Logs',
-						selectMultiple: true,
-						snippet: "Please provide verbose POA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_poa_mon_log_files.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/a7u9jel.html\n"
-					},
-					{
-						name: 'GWIA Logs',
-						selectMultiple: true,
-						snippet: "Please provide verbose GWIA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_gwia_mon_log.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/ak8u8jp.html\n"
-					},
-					{
-						name: 'WebAccess Logs',
-						selectMultiple: true,
-						snippet: "Please provide verbose WebAccess logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_webacc_mon_logs.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/bw83bv6.html\n"
-					},
-					{
-						name: 'MTA Logs',
-						selectMultiple: true,
-						snippet: "Please provide verbose MTA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_mta_mon_log_files.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/a7xzvus.html\n"
-					},
-					{
-						name: 'DVA Logs',
-						selectMultiple: true,
-						snippet: "Please provide verbose DVA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_dva_log.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/bujawkn.html\n"
-					}
-				]
-			},
-			{
-				name: 'eDirectory',
-				selectMultiple: true,
-				snippet: '',
-				items: []
-			},
-			{
-				name: 'GMS',
-				selectMultiple: true,
-				snippet: '',
-				items: [
-					{
-						name: 'ghc + upload logs',
-						selectMultiple: true,
-						snippet: 'Please run the dsapp General Health Check and upload Mobility logs:\nhttps://www.novell.com/support/kb/doc.php?id=7014307\n'
-					},
-					{
-						name: 'Update Mobility',
-						selectMultiple: true,
-						snippet: 'Please see the following to update Mobility:\nhttps://www.novell.com/support/kb/doc.php?id=7007012\n'
-					},
-					{
-						name: 'OS Upgrade Mobility',
-						selectMultiple: true,
-						snippet: 'Please see the following to upgrade the OS on a Mobility server:\nhttps://www.novell.com/support/kb/doc.php?id=7010339\n\nIt is important that Mobility is selected as an Add-On product during the upgrade or the following issue will happen:\nhttps://www.novell.com/support/kb/doc.php?id=7012365\n'
-					},
-					{
-						name: 'Self-signed certificate',
-						selectMultiple: true,
-						snippet: 'Please see the following to create a self-signed certificate:\nhttps://www.novell.com/support/kb/doc.php?id=7007674\n'
-					},
-					{
-						name: '3rd-party certificate',
-						selectMultiple: true,
-						snippet: 'Please see the following to implement a 3rd-party Trusted CA certificate:\nhttps://www.novell.com/support/kb/doc.php?id=7006904\n'
-					},
-					{
-						name: 'Device Connectivity Issues',
-						selectMultiple: true,
-						snippet: 'There can be many causes of device connectivity issues. Please refer to the following Master TID to rule out common scenarios:\nhttps://www.novell.com/support/kb/doc.php?id=7013053\n'
-					},
-					{
-						name: 'How to remove db references',
-						selectMultiple: true,
-						snippet: 'Please attempt to remove the user with WebAdmin first. Use the following TID as a last resort to clear potential database corruption:\nhttps://www.novell.com/support/kb/doc.php?id=7008852\n'
-					},
-					{
-						name: 'Refresh Mobility Server',
-						selectMultiple: true,
-						snippet: 'Please see the following to refresh a Mobility server:\nhttps://www.novell.com/support/kb/doc.php?id=7014473\nNote: This is typically used when there are corrupt databases, slow performance on a large system where maintenance that has never been run and will take too long to catch up, etc. This essentially is a fresh install option, which will resync the data fresh from GroupWise.'
-					}
-				]
-			},
-			{
-				name: 'Filr',
-				selectMultiple: true,
-				snippet: '',
-				items: []
-			}
-		]
-
-	};
-
 	$scope.compileSnippet = function(template, selectedRow) {
 
 		// Render variable-dependant snippet(s)
@@ -215,48 +66,17 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	$scope.handleTemplate = function(template) {
 
 		// If template requires variables from selectedRow, and 1 row isn't selected
-		if(!template.selectMultiple && $scope.selectedRows.length != 1) 
+		if(!template.selectMultiple && $scope.getCurrentSelection().length != 1) 
 			toastr.error('Please only select one SR when using this template');
 		// Render variable-dependant snippets (depends on 1-row selected)
 		else if(!template.selectMultiple)
-			$scope.compileSnippet(template, $scope.selectedRows[0]);
+			$scope.compileSnippet(template, $scope.getCurrentSelection()[0]);
 
 		// Finally, insert the snippet
 		$scope.editorContent.focus();
 		$scope.editorContent.insertText($scope.editorContent.getSelection().start, template.snippet + '\n');
 
 	};
-
-	// Initialize editor with custom theme and modules
-	// $scope.editorContent = new Quill('#content', {
-	// 	modules: {
-	// 		'toolbar': { container: '#toolbar-content' },
-	// 		'link-tooltip': true,
-	// 		'image-tooltip': true
-	// 	},
-	// 	styles: {
-	// 		'body': {
-	// 			'font-family': "'Arial', san-serif",
-	// 			'font-size': "12px"
-	// 		}
-	// 	},
-	// 	theme: 'snow'
-	// });
-
-	// $scope.editorSignature = new Quill('#signature', {
-	// 	modules: {
-	// 		'toolbar': { container: '#toolbar-signature' },
-	// 		'link-tooltip': true,
-	// 		'image-tooltip': true
-	// 	},
-	// 	styles: {
-	// 		'body': {
-	// 			'font-family': "'Arial', san-serif",
-	// 			'font-size': "12px"
-	// 		}
-	// 	},
-	// 	theme: 'snow'
-	// });
 
 	$scope.setFromUser = function(boolean){
 		$scope.formData.fromUser = boolean;
@@ -268,18 +88,18 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 
 	$scope.toggleClass = function(element, className){
 		if (!element || !className){
-				return;
+			return;
 		}
 
 		var classString = element.className, 
-				nameIndex = classString.indexOf(className);
+			nameIndex = classString.indexOf(className);
 
 		if (nameIndex == -1) {
-				classString += ' ' + className;
+			classString += ' ' + className;
+		} else {
+			classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
 		}
-		else {
-				classString = classString.substr(0, nameIndex) + classString.substr(nameIndex+className.length);
-		}
+
 		element.className = classString;
 	};
 
@@ -304,7 +124,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 
 	$scope.gridOptions = {
 		data: 'myData',
-		selectedItems: $scope.selectedRows,
+		// selectedItems: $scope.selectedRows,
 		// infiniteScrollRowsFromEnd: 40,
 	 	// infiniteScrollUp: true,
 	 	// infiniteScrollDown: true,
@@ -318,6 +138,9 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		enableGridMenu: false,
 		showGridFooter: true,
 		enableHorizontalScrollbar: 0, 
+		onRegisterApi: function(gridApi) {
+			$scope.gridApi = gridApi;
+		},
 		columnDefs: [
 			{field: 'CREATEDON', displayName: 'Created On', enableCellEdit: false, cellFilter: 'date:\'mediumDate\'', width:'**', cellClass: 'grid-align-center'},
 			{field: 'SR', displayName: 'SR', enableCellEdit: false, width:'**'},
@@ -337,10 +160,10 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 
 	// 	preview = "<div class=\"modal-header\"><button type=\"button\" class=\"close\" ng-click=\"no()\">×</button><h4 class=\"modal-title ng-binding\"><span class=\"glyphicon glyphicon-check\"></span> Please Confirm</h4></div><div class=\"modal-body\">"+ $scope.editorContent + $scope.editorSignature +"</div><div class=\"modal-footer\"><button class=\"btn btn-primary\" ng-click=\"ok()\">OK</button><button class=\"btn btn-default\" ng-click=\"cancel()\">Cancel</button></div>";
 
-	// 	// $scope.modalInstance = $modal.open({
-	// 	// 	template: preview,
-	// 	// 	controller: $scope.ModalInstanceCtrl
-	// 	// });
+	// 	$scope.modalInstance = $modal.open({
+	// 		template: preview,
+	// 		controller: $scope.ModalInstanceCtrl
+	// 	});
 
 	// };
 
@@ -355,6 +178,11 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	// 		$modalInstance.dismiss();
 	// 	};
 	// };
+
+	$scope.getCurrentSelection = function() {
+		var currentSelection = $scope.gridApi.selection.getSelectedRows();
+		return currentSelection;
+	};
 
 	$scope.getServiceRequests = function() {
 
@@ -376,7 +204,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 				$scope.myData = body;
 				toastr.success('Received Service Requests.');
 				$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();
-				// $scope.gridOptions.$gridScope.toggleSelectAll(false);
+				$scope.gridApi.selection.clearSelectedRows();
 			}).error(function (data, status, headers, config) {
 					toastr.error('Failed to retrieve service requests!');
 					console.error(data);
@@ -386,14 +214,17 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	};
 
 	$scope.sendMail = function(){
-
-		if ($scope.selectedRows.length === 0) {
+		
+		if ($scope.getCurrentSelection().length <= 0) {
 			toastr.error('No Service Request selected!');
 		} else {
 			$scope.spinIt('spinMe'); 
 			$scope.rememberMe();
 			$scope.formData.content = $scope.editorContent;
 			$scope.formData.signature = $scope.editorSignature;
+			if($scope.formData.ccSupport === 'None') $scope.formData.activityCode = null;
+			$scope.formData.emails = $scope.getCurrentSelection();
+			console.log($scope.formData.emails);
 
 			$http({
 				url: 'sendMail',
@@ -405,11 +236,11 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 					toastr.success(JSON.parse(res));
 					$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();
 					$scope.editorContent = '';
-					// $scope.gridOptions.$gridScope.toggleSelectAll(false);
+					$scope.gridApi.selection.clearSelectedRows();
 				}).error(function (data, status, headers, config) {
-						toastr.error(headers);
-						console.error(data); 
-						$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();  
+					toastr.error(headers);
+					console.error(data); 
+					$scope.toggleClass($scope.blurMe, 'blur'); $scope.spinner.stop();  
 				});
 		}
 			
@@ -423,6 +254,8 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 				localStorageService.set('engineer', $scope.formData.engineer);
 				localStorageService.set('password', $scope.formData.password);
 				localStorageService.set('fromUser', $scope.formData.fromUser);
+				localStorageService.get('ccSupport', $scope.formData.ccSupport);
+				localStorageService.get('activityCode', $scope.formData.activityCode);
 				localStorageService.set('signature', $scope.editorSignature);
 			} else {
 				localStorageService.clearAll();
@@ -430,5 +263,141 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		}
 		
 	};
+
+	// Templates: update view, create handle
+	// $scope.templates = {
+
+	// 	general: [
+	// 		{
+	// 			name: '*New SR',
+	// 			selectMultiple: false,
+	// 			snippet: ''
+	// 		},
+	// 		{
+	// 			name: 'Bomgar Invitation',
+	// 			selectMultiple: true,
+	// 			snippet: "Are you available for a Bomgar session? \nYou can connect by either of the following: \nURL\nOr http://www.websupport.com and enter NUMBER as the session key."
+	// 		},
+	// 		{
+	// 			name: 'EMEA',
+	// 			selectMultiple: true,
+	// 			snippet: "I see our timezones are very different. Are you available to work this issue now? I will keep this Service Request until the end of my shift. If I do not receive an email back from you, I'll go ahead and put this Service Request in the queue for the team in your timezone."
+	// 		},
+	// 		{
+	// 			name: 'Follow-up',
+	// 			selectMultiple: true,
+	// 			snippet: "Just following up with you, as I haven't heard from you since my last email. What is the current status of this service request?"
+	// 		},
+	// 		{
+	// 			name: 'Schedule to Close',
+	// 			selectMultiple: true,
+	// 			snippet: "Just checking in to verify the issue has been resolved. I'll be placing this SR in a Schedule to Close state. If I don't hear back from you, I'll go ahead and close the SR. Feel free to contact me."
+	// 		},
+	// 		{
+	// 			name: 'Close',
+	// 			selectMultiple: true,
+	// 			snippet: "I'll be closing this Service Request. If the issue returns, feel free to contact me within 14 days and I will reopen the SR."
+	// 		},
+	// 		{
+	// 			name: 'Support Config',
+	// 			selectMultiple: true,
+	// 			snippet: "Let's start by getting a support config. Most SLES Servers have the following tool by default.\n\nPlease execute the following command on the eDirectory server:\nsupportconfig -ur <SR#>\n\nThis will automatically upload the servers configuration information and attach it to the SR."
+	// 		}
+	// 	],
+	// 	special: [
+	// 		{
+	// 			name: 'GroupWise',
+	// 			selectMultiple: true,
+	// 			snippet: '',
+	// 			items: [
+	// 				{
+	// 					name: 'POA Logs',
+	// 					selectMultiple: true,
+	// 					snippet: "Please provide verbose POA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_poa_mon_log_files.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/a7u9jel.html\n"
+	// 				},
+	// 				{
+	// 					name: 'GWIA Logs',
+	// 					selectMultiple: true,
+	// 					snippet: "Please provide verbose GWIA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_gwia_mon_log.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/ak8u8jp.html\n"
+	// 				},
+	// 				{
+	// 					name: 'WebAccess Logs',
+	// 					selectMultiple: true,
+	// 					snippet: "Please provide verbose WebAccess logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_webacc_mon_logs.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/bw83bv6.html\n"
+	// 				},
+	// 				{
+	// 					name: 'MTA Logs',
+	// 					selectMultiple: true,
+	// 					snippet: "Please provide verbose MTA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_mta_mon_log_files.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/a7xzvus.html\n"
+	// 				},
+	// 				{
+	// 					name: 'DVA Logs',
+	// 					selectMultiple: true,
+	// 					snippet: "Please provide verbose DVA logs from the time of the incident:\nhttps://www.novell.com/documentation/groupwise2014/gw2014_guide_admin/data/adm_dva_log.html\nhttps://www.novell.com/documentation/groupwise2012/gw2012_guide_admin/data/bujawkn.html\n"
+	// 				}
+	// 			]
+	// 		},
+	// 		{
+	// 			name: 'eDirectory',
+	// 			selectMultiple: true,
+	// 			snippet: '',
+	// 			items: []
+	// 		},
+	// 		{
+	// 			name: 'GMS',
+	// 			selectMultiple: true,
+	// 			snippet: '',
+	// 			items: [
+	// 				{
+	// 					name: 'ghc + upload logs',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please run the dsapp General Health Check and upload Mobility logs:\nhttps://www.novell.com/support/kb/doc.php?id=7014307\n'
+	// 				},
+	// 				{
+	// 					name: 'Update Mobility',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please see the following to update Mobility:\nhttps://www.novell.com/support/kb/doc.php?id=7007012\n'
+	// 				},
+	// 				{
+	// 					name: 'OS Upgrade Mobility',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please see the following to upgrade the OS on a Mobility server:\nhttps://www.novell.com/support/kb/doc.php?id=7010339\n\nIt is important that Mobility is selected as an Add-On product during the upgrade or the following issue will happen:\nhttps://www.novell.com/support/kb/doc.php?id=7012365\n'
+	// 				},
+	// 				{
+	// 					name: 'Self-signed certificate',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please see the following to create a self-signed certificate:\nhttps://www.novell.com/support/kb/doc.php?id=7007674\n'
+	// 				},
+	// 				{
+	// 					name: '3rd-party certificate',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please see the following to implement a 3rd-party Trusted CA certificate:\nhttps://www.novell.com/support/kb/doc.php?id=7006904\n'
+	// 				},
+	// 				{
+	// 					name: 'Device Connectivity Issues',
+	// 					selectMultiple: true,
+	// 					snippet: 'There can be many causes of device connectivity issues. Please refer to the following Master TID to rule out common scenarios:\nhttps://www.novell.com/support/kb/doc.php?id=7013053\n'
+	// 				},
+	// 				{
+	// 					name: 'How to remove db references',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please attempt to remove the user with WebAdmin first. Use the following TID as a last resort to clear potential database corruption:\nhttps://www.novell.com/support/kb/doc.php?id=7008852\n'
+	// 				},
+	// 				{
+	// 					name: 'Refresh Mobility Server',
+	// 					selectMultiple: true,
+	// 					snippet: 'Please see the following to refresh a Mobility server:\nhttps://www.novell.com/support/kb/doc.php?id=7014473\nNote: This is typically used when there are corrupt databases, slow performance on a large system where maintenance that has never been run and will take too long to catch up, etc. This essentially is a fresh install option, which will resync the data fresh from GroupWise.'
+	// 				}
+	// 			]
+	// 		},
+	// 		{
+	// 			name: 'Filr',
+	// 			selectMultiple: true,
+	// 			snippet: '',
+	// 			items: []
+	// 		}
+	// 	]
+
+	// };
 
 }]);

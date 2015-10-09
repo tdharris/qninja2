@@ -1,5 +1,6 @@
 body {
     background-image: url(../../../img/debut_dark.png);
+    color: #9c9c9c;
 }
 .main {
     margin-top: 15px;
@@ -275,6 +276,18 @@ tbody tr {
       height: 100% !important;
     }*/
 
+#cc {
+    margin-right: 10px;
+}
+
+/* Dark theme */
+
+/* Normalize btn drop-down color
+    default bootstrap behavior makes it unreadable
+    in this dark theme */
+.btn.focus, .btn:focus, .btn:hover {
+    color:inherit;
+}
 
 /* Dark-Theme: angular ui-grid */
 .ui-grid-header {
@@ -295,4 +308,13 @@ tbody tr {
     -moz-transition:color .3s ease-in;
     -o-transition:color .3s ease-in;
     transition:color .3s ease-in;
+}
+.ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell {
+    background-color: rgb(196, 255, 187);   
+}
+.ui-grid-canvas {
+    color: black;
+}
+.ui-grid-selection-row-header-buttons {
+    opacity: 0.3;
 }

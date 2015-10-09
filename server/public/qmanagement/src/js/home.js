@@ -17,7 +17,7 @@ $( document ).ready(function() {
 	    	$(this).find('.btn').toggleClass('btn-info');
 	    }
 
-	    $(this).find('.btn').toggleClass('btn-default');
+	    $(this).find('.btn').toggleClass('btn-dark');
     });
 
     // Prevent backspace from going back in browser

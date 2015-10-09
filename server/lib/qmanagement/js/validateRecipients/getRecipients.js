@@ -1,5 +1,5 @@
 var setops = require('setops'),
-	myUtil = require('./myUtil'),
+	myUtil = require('../util'),
     validate = require('./validate');
 
 module.exports = function getRecipients(array) {

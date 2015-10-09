@@ -2,11 +2,11 @@ var logme = require('logme'),
     swig  = require('swig'),
     path = require('path');
 
-var Report = module.exports = function(engineer, transport) {
-    this.engineer = engineer;
-    this.transport = transport;
+var Report = module.exports = function(obj) {
+    this.engineer = obj.engineer;
+    this.transport = obj.transport;
+    this.content = obj.content || '';
     this.responses = [];
-    this.content = "";
     // var file = ;
     // console.log(typeof file, file);
     // this.htmlReport = swig.compileFile(file);
@@ -16,7 +16,7 @@ Report.prototype = {
 
     send: function(done) {
         var self = this,
-            content = swig.renderFile(__dirname + "/../views/report.html", {
+            content = swig.renderFile("./views/qmanagement/report/report.html", {
                 messages: self.responses,
                 content:  self.content
             });
@@ -36,11 +36,11 @@ Report.prototype = {
             logme.debug(JSON.stringify(response));
             if(error) { 
                 logme.error(error);
-                return done(error, null);
-            }
-
-            logme.info('Sent Report:', response.message + ' | To:', mailOptions.to);
-            done();
+                done(error);
+            } else {
+                logme.info('Sent Report: messageId', response.envelope.messageId + ' | To:', mailOptions.to);
+                done(null);
+            };
         });
         
         // fs.readFile(__dirname + '/report.html', 'utf8', function(err, html) {
