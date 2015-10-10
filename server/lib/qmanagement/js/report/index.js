@@ -14,10 +14,10 @@ var Report = module.exports = function(obj) {
 
 Report.prototype = {
 
-    send: function(done) {
+    send: function(results, done) {
         var self = this,
             content = swig.renderFile("./views/qmanagement/report/report.html", {
-                messages: self.responses,
+                messages: results,
                 content:  self.content
             });
 

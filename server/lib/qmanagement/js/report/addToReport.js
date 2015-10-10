@@ -13,8 +13,8 @@ module.exports = function(mail, task, cb) {
     else mail.results.reportMessage = 'Sent: <b style="color: green">' + mail.results.info.message + ' ✔</b> | ' + mailInfo;
 
     // Append to report 
-    task.report.responses.push(mail.results.reportMessage);
+    //task.report.responses.push(mail.results.reportMessage);
 
-    cb(null, mail, task);
+    cb(null, mail.results.reportMessage);
 
 };
