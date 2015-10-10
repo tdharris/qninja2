@@ -2,7 +2,11 @@ var express = require('express'),
     app = module.exports = express(),
     bodyParser = require('body-parser'),
     compress = require('compression')(),
-    path = require('path');
+    logme = require('logme'),
+    fs = require('fs'),
+    path = require('path'),
+    http = require('http'),
+    https = require('https');
 
 var pub = path.join(__dirname,'/public');
 
@@ -18,6 +22,18 @@ app.set('view engine', 'jade')
 // include router
 require('./lib/router')(app);
 
-// Start server
-app.listen(80);
-	
+// Start server: redirect http to https
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80, function(){
+  logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
+});
+https.createServer({
+    key: fs.readFileSync('./lib/ssl/private.key'),
+    cert: fs.readFileSync('./lib/ssl/server.crt'),
+    requestCert: false,
+    rejectUnauthorized: false
+}, app).listen(443, function() {
+	logme.info('[qninja] is listening at https://'+this.address().address+':'+this.address().port);
+});
