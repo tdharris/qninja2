@@ -50,8 +50,8 @@ module.exports = function(req, res, next) {
             logme.info(eventHeader, 'Preparing mail item(s) with options (fromUser|ccSupport|activityCode):',task.mail.fromUser,task.mail.ccSupport,JSON.stringify(task.mail.activityCode)); 
             async.each(
                 request.emails, 
-                require('./processItem').bind(task), 
-                finishTask(err) // send report & cleanup
+                require('./processItem')(task), 
+                finishTask // send report & cleanup
             );      
 
         }

@@ -1,7 +1,7 @@
 var request = require('request'),
 		logme = require('logme'),
 		api = require('express-api-helper'),
-		myUtil = require('./myUtil'),
+		myUtil = require('./util'),
 		async = require('async');
 
 module.exports=function(req, res) {

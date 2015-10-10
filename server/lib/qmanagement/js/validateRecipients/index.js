@@ -14,7 +14,7 @@ module.exports = function(mail, task) {
 	    logme.debug(eventHeader, 'Validated recipients: ', mail.recipients);
 
 	    console.log(mail, task.owner);
-	    cb(null, mail);
+	    cb(null, mail, task);
 
 	};
 
