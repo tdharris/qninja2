@@ -23,10 +23,7 @@ module.exports = function(task) {
             createMail, 
             sendMail,
             addToReport
-        ], function(err, mail, task){
-            if(err) done(err, mail, task);
-            else done(null, mail, task);
-        }); 
+        ], done); 
     };
 
 }

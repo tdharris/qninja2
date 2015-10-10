@@ -48,10 +48,10 @@ module.exports = function(req, res, next) {
 
             // Iterate through mail items to validate, prep, send
             logme.info(eventHeader, 'Preparing mail item(s) with options (fromUser|ccSupport|activityCode):',task.mail.fromUser,task.mail.ccSupport,JSON.stringify(task.mail.activityCode)); 
-            async.each(
+            async.map(
                 request.emails, 
                 require('./processItem')(task), 
-                finishTask // send report & cleanup
+                finishTask(task) // send report & cleanup
             );      
 
         }
