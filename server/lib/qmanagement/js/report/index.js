@@ -33,12 +33,11 @@ Report.prototype = {
             self.transport.close();
             
             // exit early if there's an error
-            logme.debug(JSON.stringify(response));
             if(error) { 
-                logme.error(error);
+                logme.error('[qManagement] [report] Error sending report: ', error);
                 done(error);
             } else {
-                logme.info('Sent Report: messageId', response.envelope.messageId + ' | To:', mailOptions.to);
+                logme.info('[qManagement] [report] Sent Report to: ', mailOptions.to + ', with messageId response: ', response.messageId);
                 done(null);
             };
         });

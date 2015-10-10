@@ -8,13 +8,7 @@ var logme = require('logme'),
 module.exports = function(task) {
 
     return function(mail, done) {
-       console.log(mail);
-        console.log(task.owner);
-        console.log(done);
-        console.log("-----------------");
-
-        var eventHeader = '[processItem] [' + task.owner + ']';
-        logme.info(eventHeader, 'Beginning to process request');
+        logme.info(task.eventHeader, 'Beginning to process request');
 
         // mail: the item being processed from the list
         // task: the object containing request-specific details, info needed during every iteration
@@ -26,4 +20,4 @@ module.exports = function(task) {
         ], done); 
     };
 
-}
+};

@@ -2,8 +2,8 @@ var nodemailer = require('nodemailer'),
     smtpPool = require('nodemailer-smtp-pool'),
     logme = require('logme');
 
-exports.novell = function(engineer, password) {
-    var eventHeader = "[transport] [" + engineer + "]";
+exports.createEngineerTransport = function(credentials, eventHeader) {
+    var eventHeader = eventHeader + "[transport]";
     
     logme.debug(eventHeader, "Creating novell smtp transport with engineer's credentials");
     var transport = nodemailer.createTransport(smtpPool({
@@ -15,8 +15,8 @@ exports.novell = function(engineer, password) {
         },
         port: 25, // port for secure SMTP
         auth: {
-            user: engineer,
-            pass: password
+            user: credentials.engineer,
+            pass: credentials.password
         },
         // use up to 5 parallel connections
         maxConnections: 5,

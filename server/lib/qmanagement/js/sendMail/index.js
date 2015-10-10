@@ -2,10 +2,10 @@ var logme = require('logme');
 
 module.exports = function(mail, task, cb) {
 
-    var eventHeader = '[sendMail] [' + task.owner + ']';
+    var eventHeader = task.eventHeader + '[sendMail] ';
 
     // Send mail through transport
-    logme.debug(eventHeader + 'Sending:' + JSON.stringify(mail.mailOptions));
+    logme.debug(eventHeader + 'Sending: ' + mail.mailOptions.);
     task.transport.sendMail(mail.mailOptions, function(err, info){
         var message;
         mail.results = {

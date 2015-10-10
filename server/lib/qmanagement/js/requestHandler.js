@@ -9,14 +9,14 @@ var async = require('async'),
 var queue = async.queue(function(taskHandler, done) {
     // call 'process' function on the taskHandler that I pushed in
     taskHandler.process(done);
-}, 1);
+}, 2);
 
 
 // http request handler
 module.exports = function(req, res, next) {
     var request = req.body;
-    var eventHeader = '[taskHandler] [' + request.engineer + '] ';
-    logme.info(eventHeader, 'Request rcvd for', req.body.engineer, 'to process', req.body.emails.length, 'email(s)');
+    var eventHeader = '[qManagement] [' + request.engineer + '] ';
+    logme.info(eventHeader, '[taskHandler] Request rcvd to process', req.body.emails.length, 'email(s)');
     // create a task handler that does a eachLimit on the emails
     // it will processEmail and sendReport when done
     var taskHandler = {
@@ -24,14 +24,18 @@ module.exports = function(req, res, next) {
 
             // Common task data needed by each item when sending mail
             // Create one transport and report for entire task
-            logme.debug(eventHeader, 'Creating task: transport, report, mailOptions');
-            var novellTransport = transport.novell(request.engineer, request.password),
+            logme.debug(eventHeader, '[taskHandler] Creating task: transport, report, mailOptions');
+            var novellTransport = transport.createEngineerTransport({
+                    engineer: request.engineer, 
+                    password: request.password
+                }, eventHeader),
                 report = new Report({
                     engineer: request.engineer, 
                     transport: transport.notify(),
                     content: request.content + request.signature
                 });
             var task = { 
+                eventHeader: eventHeader,
                 owner: request.engineer,
                 report: report,
                 transport: novellTransport,
@@ -47,11 +51,11 @@ module.exports = function(req, res, next) {
             };
 
             // Iterate through mail items to validate, prep, send
-            logme.info(eventHeader, 'Preparing mail item(s) with options (fromUser|ccSupport|activityCode):',task.mail.fromUser,task.mail.ccSupport,JSON.stringify(task.mail.activityCode)); 
+            logme.info(eventHeader, '[taskHandler] Preparing mail item(s) with options (fromUser|ccSupport|activityCode):',task.mail.fromUser,task.mail.ccSupport,JSON.stringify(task.mail.activityCode)); 
             async.map(
                 request.emails, 
                 require('./processItem')(task), 
-                finishTask(task) // send report & cleanup
+                finishTask(task, done) // send report & cleanup
             );      
 
         }
@@ -60,7 +64,7 @@ module.exports = function(req, res, next) {
     queue.push(taskHandler);
     
     // send response that their work has been queued
-    api.ok(req, res, 'Task has been queued!');
+    api.ok(req, res, 'Task rcvd');
 };
 
 // Convert object to array

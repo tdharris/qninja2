@@ -3,7 +3,7 @@ var myUtil = require('../util'),
 
 module.exports = function(mail, task, cb) {
 
-    var eventHeader = '[createMail] [' + task.owner + ']',
+    var eventHeader = task.eventHeader + '[createMail]',
         from = "support@novell.com";
 
     logme.debug(eventHeader, 'Preparing mail by creating mailOptions')
@@ -11,11 +11,14 @@ module.exports = function(mail, task, cb) {
         from = mail.ENGINEER.toLowerCase() + "@novell.com";
     };
 
+    var subject = "SR " + mail.SR + " - " + mail.BRIEF;
+    if(typeof mail.activityCode !== "undefined") subject += " " + mail.activityCode;
+
     mail.mailOptions = {
         from: from,
         to: mail.recipients.join(','),
         cc: mail.ccSupport,
-        subject: "SR " + mail.SR + " - " + mail.BRIEF + " " + mail.activityCode,
+        subject: subject,
         html: task.mail.content + task.mail.signature
     };
 
