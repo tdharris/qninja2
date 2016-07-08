@@ -26,7 +26,7 @@ h1 {
 .space-right {
     margin-right: 5px;
 }
-.modal-body { word-wrap: break-word; }
+/*.modal-body { word-wrap: break-word; }*/
 h3 {
     font-weight: normal;
 }
@@ -81,8 +81,8 @@ h3 {
 }
 p {
     font-family: 'Cardo', Georgia, Times, serif;
-    font-size: 18px;
-    line-height: 25px;
+    font-size: 14px;
+    line-height: 18px;
 }
 .pointer {
     cursor: pointer;
@@ -173,10 +173,7 @@ p {
     background-color: #333333;
 }
 .modal-body p {
-    font-family: 'Cardo', Georgia, Times, serif;
-    font-style: normal;
-    font-size: 14px;
-    /*line-height: 18px;*/
+    color:black;
 }
 .btn-toggle>.btn-default {
     background-color: #fff;
@@ -268,6 +265,7 @@ tbody tr {
     color: #fff;
     background-color: #8AB8E6;
 }
+
 /*.ngCellText{
     white-space:normal !important;
     }
@@ -310,11 +308,16 @@ tbody tr {
     transition:color .3s ease-in;
 }
 .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell {
-    background-color: rgb(196, 255, 187);   
+    color: rgb(166, 255, 155);
 }
 .ui-grid-canvas {
-    color: black;
+    color: #9c9c9c;
 }
 .ui-grid-selection-row-header-buttons {
     opacity: 0.3;
 }
+.ui-grid-cell {
+    border: none !important;
+}
+.ui-grid-cell{background-color:#1F1F1F !important}.ui-grid-row:nth-child(even) 
+.ui-grid-cell{background-color:#1F1F1F !important}.ui-grid-row:last-child

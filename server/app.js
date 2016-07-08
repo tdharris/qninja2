@@ -17,7 +17,7 @@ app.use(compress)
 
 // setup renderer
 app.set('view engine', 'jade')
-   .set('views', __dirname); // default dir is 'views'
+   .set('views', __dirname);
 
 // include router
 require('./lib/router')(app);
@@ -30,10 +30,12 @@ http.createServer(function (req, res) {
   logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
 });
 https.createServer({
-    key: fs.readFileSync('./lib/ssl/private.key'),
-    cert: fs.readFileSync('./lib/ssl/server.crt'),
-    requestCert: false,
-    rejectUnauthorized: false
+    key: fs.readFileSync('./lib/ssl/lab/lab.key'),
+    cert: fs.readFileSync('./lib/ssl/lab/lab.pem')
+    //requestCert: false,
+    //rejectUnauthorized: false
+    //pfx: fs.readFileSync('./lib/ssl/lab.pfx'),
+    //passphrase: 'novell'
 }, app).listen(443, function() {
 	logme.info('[qninja] is listening at https://'+this.address().address+':'+this.address().port);
 });

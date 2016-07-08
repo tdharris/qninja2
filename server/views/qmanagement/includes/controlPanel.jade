@@ -19,7 +19,7 @@
         .btn-group.btn-toggle(data-toggle="buttons")
           label.btn.btn-primary.active(data-toggle="fromUserSwitch", ng-model="formData.fromUser", ng-click="setFromUser(true)")
             input(type="radio", name="fromUser")
-            | {{formData.engineer}}@novell.com
+            | {{formData.engineer}}@microfocus.com
           label.btn.btn-dark(data-toggle="fromUserSwitch", ng-model="formData.fromUser", ng-click="setFromUser(false)")
             input(type="radio", name="fromUser")
             | support@novell.com
@@ -46,8 +46,6 @@
           label
             input#rememberMe(type="checkbox")
             | Remember Me
-      div
-        input(type="submit", style="display: none;")
       
-      button.btn.btn-dark.btn-block(ng-click="open('lg')", style="margin-right:20px") Preview
-      button#sendMail.btn.btn-success.btn-default.btn-block(ng-click="sendMail()", type="button") Send
+    button#preview.btn.btn-dark.btn-block(data-toggle="modal", data-target="#preview", ng-click="updateContent()") Preview
+    button#sendMail.btn.btn-success.btn-block(ng-click="sendMail()", type="button") Send

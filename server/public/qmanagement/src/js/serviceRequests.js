@@ -27,33 +27,34 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	$scope.init = function(){
 		// Local Storage: rememberMe (Retrieve from store)
 		if(localStorageService.isSupported){
-			$scope.formData.engineer = localStorageService.get("engineer"),
-			$scope.formData.password = localStorageService.get("password"),
-			$scope.formData.signature = localStorageService.get("signature");
+			var rememberMe = localStorageService.get("rememberMe");
+			if(rememberMe) {
+				$scope.formData.engineer = localStorageService.get("engineer");
+				$scope.formData.password = localStorageService.get("password");
+				$scope.formData.signature = localStorageService.get("signature");
 
-			var fromUser = localStorageService.get("fromUser"),
-				ccSupport = localStorageService.get("ccSupport"),
-				activityCode = localStorageService.get("activityCode");
+				var fromUser = localStorageService.get("fromUser"),
+					ccSupport = localStorageService.get("ccSupport"),
+					activityCode = localStorageService.get("activityCode");
 
-			if(fromUser !== null)
-				$scope.formData.fromUser = localStorageService.get("fromUser");
-			if(ccSupport !== null)
-				$scope.formData.ccSupport = localStorageService.get("ccSupport");
-			if(activityCode !== null)
-				$scope.formData.activityCode = localStorageService.get("activityCode");
+				if(fromUser !== null)
+					$scope.formData.fromUser = localStorageService.get("fromUser");
+				if(ccSupport !== null)
+					$scope.formData.ccSupport = localStorageService.get("ccSupport");
+				if(activityCode !== null)
+					$scope.formData.activityCode = localStorageService.get("activityCode");
+				if(rememberMe)
+					document.getElementById('rememberMe').checked = true;
 
-			if($scope.formData.engineer || $scope.formData.password || $scope.formData.fromUser || 
-				$scope.formData.ccSupport || $scope.formData.activityCode || $scope.formData.signature) {
-				document.getElementById('rememberMe').checked = true;
 			}
 
-			// if ($scope.formData.engineer !== undefined) $scope.getServiceRequests();
 			if ($scope.formData.signature !== undefined) $scope.editorSignature = $scope.formData.signature;
 			$scope.srContent = document.getElementById('spinner');
 
 		}
 
 		$scope.blurMe = document.getElementById('blurMe');
+		if ($scope.formData.engineer !== undefined) $scope.getServiceRequests();
 	};
 
 	$scope.compileSnippet = function(template, selectedRow) {
@@ -63,6 +64,10 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		
 	};
 
+	$scope.updateContent = function() {
+		$scope.mailContent = $scope.editorContent + $scope.editorSignature;
+	};
+	
 	$scope.handleTemplate = function(template) {
 
 		// If template requires variables from selectedRow, and 1 row isn't selected
@@ -224,7 +229,6 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 			$scope.formData.signature = $scope.editorSignature;
 			if($scope.formData.ccSupport === 'None') $scope.formData.activityCode = null;
 			$scope.formData.emails = $scope.getCurrentSelection();
-			console.log($scope.formData.emails);
 
 			$http({
 				url: 'sendMail',
@@ -251,15 +255,17 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		if(localStorageService.isSupported) {
 
 			if(document.getElementById('rememberMe').checked){
+				localStorageService.set('rememberMe', true);
 				localStorageService.set('engineer', $scope.formData.engineer);
 				localStorageService.set('password', $scope.formData.password);
 				localStorageService.set('fromUser', $scope.formData.fromUser);
-				localStorageService.get('ccSupport', $scope.formData.ccSupport);
-				localStorageService.get('activityCode', $scope.formData.activityCode);
+				localStorageService.set('ccSupport', $scope.formData.ccSupport);
+				localStorageService.set('activityCode', $scope.formData.activityCode);
 				localStorageService.set('signature', $scope.editorSignature);
 			} else {
 				localStorageService.clearAll();
 			}
+			
 		}
 		
 	};

@@ -15,16 +15,17 @@ var Report = module.exports = function(obj) {
 Report.prototype = {
 
     send: function(results, done) {
-        var self = this,
-            content = swig.renderFile("./views/qmanagement/report/report.html", {
+        logme.debug("[IMPORTANT]", JSON.stringify(results));
+        var self = this;
+        var content = swig.renderFile("./views/qmanagement/report/report.jade", {
                 messages: results,
                 content:  self.content
             });
 
         var mailOptions = {
-            from: "qNinja <qNinja@mymobile.lab.novell.com>",
-            to: this.engineer + "@novell.com",
-            subject: "[qNinja] Email Report ✔",
+            from: "qninja <qninja@mymobile.lab.novell.com>",
+            to: this.engineer + "@microfocus.com",
+            subject: "[qninja] Email Report",
             html: content
         };
 
@@ -37,7 +38,7 @@ Report.prototype = {
                 logme.error('[qManagement] [report] Error sending report: ', error);
                 done(error);
             } else {
-                logme.info('[qManagement] [report] Sent Report to: ', mailOptions.to + ', with messageId response: ', response.messageId);
+                logme.info('[qManagement] [report] Sent Report to ', mailOptions.to + ', with response: ', response.response, response.messageId);
                 done(null);
             };
         });

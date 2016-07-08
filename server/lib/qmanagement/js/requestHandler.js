@@ -25,7 +25,7 @@ module.exports = function(req, res, next) {
             // Common task data needed by each item when sending mail
             // Create one transport and report for entire task
             logme.debug(eventHeader, '[taskHandler] Creating task: transport, report, mailOptions');
-            var novellTransport = transport.createEngineerTransport({
+            var microFocusTransport = transport.createEngineerTransport({
                     engineer: request.engineer, 
                     password: request.password
                 }, eventHeader),
@@ -38,7 +38,7 @@ module.exports = function(req, res, next) {
                 eventHeader: eventHeader,
                 owner: request.engineer,
                 report: report,
-                transport: novellTransport,
+                transport: microFocusTransport,
                 mail: {
                     fromUser: request.fromUser,
                     ccSupport: request.ccSupport,

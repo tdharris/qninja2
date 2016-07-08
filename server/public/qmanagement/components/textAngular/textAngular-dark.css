@@ -51,9 +51,10 @@ text-angular a:link {
 	overflow: auto;
 	font-family: inherit;
 	font-size: 100%;
-	background-color:#1F1F1F;
+	/* Dark */
+	/*background-color:#1F1F1F;*/
 	border:0;
-	color:#585858 !important;
+	/*color:#585858 !important;*/
 }
 
 .ta-scroll-window.form-control {

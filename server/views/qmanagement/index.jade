@@ -10,6 +10,7 @@ block content
   #app(ng-app="myApp")
     #blurMe.main(ng-controller="SRCtrl", ng-init="init()", ng-form="email")
       #page
+        include ./includes/modal.jade
         .row-fluid
           .col-md-3.column
             include ./includes/controlPanel.jade

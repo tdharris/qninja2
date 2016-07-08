@@ -129,8 +129,6 @@
 	background: #222222; /* Old browsers */
 	border:0;
 	color:#9c9c9c;
-	/*text-shadow: 0 -2px 0 #000;*/
-	/*font-weight:300;*/
 }
 .nav-tabs-dark a:link { color: #9c9c9c; }
 .nav-tabs-dark .tab-content { border:0;}
@@ -140,17 +138,11 @@
 	color:#9c9c9;
 }
 
-a:link {
-    color:#fff;
-    text-decoration:none;
-}
-
-a:active {
-    color:#fff;
-    text-decoration:none;
-}
-
+a:link,
+a:active,
 a:visited {
-    color:#fff;
-    text-decoration:none;
+  color:#fff;
+  text-decoration:none;
 }
+
+ul#nav li a.active { color:#fff !important; }

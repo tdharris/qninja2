@@ -270,3 +270,6 @@ tbody tr {
 .ngVerticalBarVisible{
       height: 100% !important;
     }*/
+
+.ui-grid-cell{background-color:#2d2d2d}.ui-grid-row:nth-child(even) 
+.ui-grid-cell{background-color:#1F1F1F}.ui-grid-row:last-child

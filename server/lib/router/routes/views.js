@@ -12,6 +12,10 @@
 		res.render('views/qmanagement/index');
 	});
 
+	app.get('/qnotify', function(req, res){
+		res.render('views/qnotify/index');
+	});
+
 	app.get('/*', function(req, res){
 		res.redirect('/dashboard');
 	});

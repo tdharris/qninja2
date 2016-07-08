@@ -1,0 +1,15 @@
+// Modal
+#preview.modal.fade(role='dialog')
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal') &times;
+          |           
+          h4.modal-title Message Preview
+        |         
+        .modal-body
+          span(data-ng-bind-html='mailContent')
+          //- span(data-ng-bind-html='signatureContent')
+        |         
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Close

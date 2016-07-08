@@ -2,10 +2,11 @@
  * Route handler: qnotify
  */
 
-module.exports = function(app) {
+var express = require('express');
 
-	var express = require('express'),
-		router = express.Router();
-	
-		return router;
+module.exports = function(app) {
+	var router = express.Router();
+		module = require('../../qnotify');
+
+	return router;
 };

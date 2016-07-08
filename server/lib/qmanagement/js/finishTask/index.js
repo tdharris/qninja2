@@ -8,12 +8,13 @@ module.exports = function(task, done) {
         if(err) logme.error(eventHeader, "Problem processing request:", JSON.stringify(err));
 
         // send final report of task to engineer & close smtp-pool transport
+        logme.info(task.eventHeader + '[report] ' + 'Finished task. Sending summary report to engineer');
         task.report.send(results, function(err) {
             eventHeader += "[cleanup]";
             if(err) logme.error(eventHeader, "Problem processing request:", JSON.stringify(err));
 
-            task.transport.close(); // close the smtp-transport-pool
-            logme.debug(eventHeader, 'Finished task cleanup');
+            logme.debug(eventHeader, 'Closing smtp transport pool');
+            task.transport.close();
             logme.info(eventHeader, 'Successfully processed request');
             done();
         });
