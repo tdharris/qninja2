@@ -81,8 +81,8 @@ h3 {
 }
 p {
     font-family: 'Cardo', Georgia, Times, serif;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 18px;
+    line-height: 25px;
 }
 .pointer {
     cursor: pointer;
@@ -168,13 +168,16 @@ p {
     /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
 }
 
-.modal-header { 
-    color: #fff; 
+.modal-header {
+    color: #fff;
     background-color: #333333;
 }
-.modal-body p {
-    color:black;
-}
+/*.modal-body p {
+    font-family: 'Cardo', Georgia, Times, serif;
+    font-style: normal;
+    font-size: 14px;
+    /*line-height: 18px;*/
+}*/
 .btn-toggle>.btn-default {
     background-color: #fff;
     -webkit-box-shadow: 0 !important;
@@ -265,7 +268,6 @@ tbody tr {
     color: #fff;
     background-color: #8AB8E6;
 }
-
 /*.ngCellText{
     white-space:normal !important;
     }
@@ -308,10 +310,10 @@ tbody tr {
     transition:color .3s ease-in;
 }
 .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell {
-    color: rgb(166, 255, 155);
+    color: #3090f7 !important;
 }
 .ui-grid-canvas {
-    color: #9c9c9c;
+    color: #dcdcdc;
 }
 .ui-grid-selection-row-header-buttons {
     opacity: 0.3;
@@ -319,5 +321,5 @@ tbody tr {
 .ui-grid-cell {
     border: none !important;
 }
-.ui-grid-cell{background-color:#1F1F1F !important}.ui-grid-row:nth-child(even) 
+.ui-grid-cell{background-color:#2d2d2d !important}.ui-grid-row:nth-child(even)
 .ui-grid-cell{background-color:#1F1F1F !important}.ui-grid-row:last-child

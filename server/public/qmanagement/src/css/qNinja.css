@@ -599,8 +599,8 @@ p {
     /*transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;*/
 }
 
-.modal-header { 
-    color: #fff; 
+.modal-header {
+    color: #fff;
     background-color: #333333;
 }
 .modal-body p {
