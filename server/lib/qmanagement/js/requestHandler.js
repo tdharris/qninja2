@@ -43,8 +43,8 @@ module.exports = function(req, res, next) {
                     fromUser: request.fromUser,
                     ccSupport: request.ccSupport,
                     activityCode: request.activityCode,
-                    content: request.content,
-                    signature: request.signature
+                    content: request.content || '',
+                    signature: request.signature || ''
                 },
                 req: req,
                 res: res

@@ -2,6 +2,8 @@ var logme = require('logme'),
     swig  = require('swig'),
     path = require('path');
 
+// var reportTemplate = swig.compileFile('./views/qmanagement/report/report.jade');
+
 var Report = module.exports = function(obj) {
     this.engineer = obj.engineer;
     this.transport = obj.transport;
@@ -9,7 +11,7 @@ var Report = module.exports = function(obj) {
     this.responses = [];
     // var file = ;
     // console.log(typeof file, file);
-    // this.htmlReport = swig.compileFile(file);
+    this.reporttmpl = swig.compileFile('./views/qmanagement/report/report.html');
 };
 
 Report.prototype = {
@@ -17,7 +19,7 @@ Report.prototype = {
     send: function(results, done) {
         logme.debug("[IMPORTANT]", JSON.stringify(results));
         var self = this;
-        var content = swig.renderFile("./views/qmanagement/report/report.jade", {
+        var content = this.reporttmpl({
                 messages: results,
                 content:  self.content
             });

@@ -2,6 +2,8 @@
  * View routes
  */
 
+var path = require('path');
+
  module.exports = function(app) {
 
 	app.get('/dashboard', function(req, res){
@@ -16,8 +18,14 @@
 		res.render('views/qnotify/index');
 	});
 
-	app.get('/*', function(req, res){
-		res.redirect('/dashboard');
-	});
+	// All other routes should redirect to the index.html
+	app.route('/dashboard/*')
+		.get(function(req, res) {
+		  res.render(path.resolve('views' + req.url));
+		});
+
+	// app.get('/*', function(req, res){
+	// 	res.redirect('/dashboard');
+	// });
 
 };

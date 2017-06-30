@@ -52,7 +52,7 @@ text-angular a:link {
 	font-family: inherit;
 	font-size: 100%;
 	/* Dark */
-	/*background-color:#1F1F1F;*/
+	background-color:#1F1F1F;
 	border:0;
 	/*color:#585858 !important;*/
 }
@@ -70,6 +70,7 @@ text-angular a:link {
 
 .ta-editor:focus {
 	user-select: text;
+	background-color:#fff;
 }
 
 /* add the styling for the awesomness of the resizer */

@@ -30,8 +30,8 @@ http.createServer(function (req, res) {
   logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
 });
 https.createServer({
-    key: fs.readFileSync('./lib/ssl/lab/lab.key'),
-    cert: fs.readFileSync('./lib/ssl/lab/lab.pem')
+    key: fs.readFileSync('./lib/ssl/lab/godaddy.nopass.key'),
+    cert: fs.readFileSync('./lib/ssl/lab/godaddy.pem')
     //requestCert: false,
     //rejectUnauthorized: false
     //pfx: fs.readFileSync('./lib/ssl/lab.pfx'),

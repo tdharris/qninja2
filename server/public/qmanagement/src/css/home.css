@@ -310,10 +310,11 @@ tbody tr {
     transition:color .3s ease-in;
 }
 .ui-grid-row.ui-grid-row-selected>[ui-grid-row]>.ui-grid-cell {
-    color: #3090f7 !important;
+    background-color: rgb(166, 255, 155) !important;
+    color:black;
 }
 .ui-grid-canvas {
-    color: #dcdcdc;
+    color: white;
 }
 .ui-grid-selection-row-header-buttons {
     opacity: 0.3;
@@ -321,5 +322,5 @@ tbody tr {
 .ui-grid-cell {
     border: none !important;
 }
-.ui-grid-cell{background-color:#2d2d2d !important}.ui-grid-row:nth-child(even)
-.ui-grid-cell{background-color:#1F1F1F !important}.ui-grid-row:last-child
+.ui-grid-cell{background-color:#616161 !important}.ui-grid-row:nth-child(even)
+.ui-grid-cell{background-color:#424242 !important}.ui-grid-row:last-child

@@ -23,6 +23,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 		'content': undefined,
 		'signature': undefined
 	};
+	$scope.mailContent = '';
 
 	$scope.init = function(){
 		// Local Storage: rememberMe (Retrieve from store)
@@ -65,7 +66,7 @@ myApp.controller('SRCtrl', ['$scope', '$http', 'localStorageService', function($
 	};
 
 	$scope.updateContent = function() {
-		$scope.mailContent = $scope.editorContent + $scope.editorSignature;
+		$scope.mailContent = $scope.editorContent || '' + $scope.editorSignature || '';
 	};
 	
 	$scope.handleTemplate = function(template) {

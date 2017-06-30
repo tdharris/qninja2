@@ -15,7 +15,7 @@ module.exports = function(mail, task, cb) {
     if(task.mail.activityCode != null) subject += " " + task.mail.activityCode;
 
     mail.mailOptions = {
-        from: "tyler.harris@microfocus.com",
+        from: from,
         to: mail.recipients.join(','),
         cc: task.mail.ccSupport,
         subject: subject,

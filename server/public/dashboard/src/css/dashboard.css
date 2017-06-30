@@ -6,7 +6,7 @@ body {
     /*margin:10px;*/
     color:#fff;
     margin:0; padding: 0; 
-    padding-top:100px;
+    padding-top: 75px;
 }
 
 .panel-heading>.accordion-toggle .pull-right {
@@ -70,7 +70,8 @@ a:visited {
 }
 
 ul a:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background-color: #fff;
+    color: #555 !important;
 }
 
 .left-panel {
@@ -88,8 +89,8 @@ ul a:hover {
 }*/
 
 body {
-    /*font-family:'Roboto';*/
-    font-weight:300;
+    font-family:'Roboto', sans-serif;
+    /*font-weight:400;*/
 }
 
 .list {
@@ -182,7 +183,7 @@ p {
 
 h3 {
     font-size:1em;
-    font-weight:300;
+    /*font-weight:300;*/
     font-style:normal;
     display:inline;
     margin-left: 8px;
@@ -217,7 +218,7 @@ iframe {
 
 h2 {
     margin:0;
-    font-weight:300;
+    /*font-weight:300;*/
     text-align:center;
     font-size:1em;
     line-height:25px
@@ -413,10 +414,6 @@ h2 {
     -ms-animation:ripple 0.65s linear;
      -o-animation:ripple 0.65s linear;
         animation:ripple 0.65s linear;
-}
-
-.wallboard-panel {
-    max-height: 332px;
 }
 
 @-webkit-keyframes ripple {
