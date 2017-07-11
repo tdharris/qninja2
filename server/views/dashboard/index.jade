@@ -9,156 +9,154 @@ block css
 block content
 	.row-fluid(ng-app="dashboard" ng-controller="dash")
 		//- Dashboard
-		.col-md-12.col-lg-5
-			#accordion.panel-group
-				.panel.panel-default
-					.panel-heading
-						a.accordion-toggle(data-toggle='collapse', href='#collapseOne' aria-expanded="true" aria-controls="collapseOne")
-							i.fa.fa-home
-							h3 tharris
-							i.glyphicon.glyphicon-chevron-down.pull-right
-						a.install.pull-right(href='files/workPluginsTyler.zip')
-							i.fa.fa-cloud-download
-					#collapseOne.panel-collapse.collapse.in
-						.panel-body
-							.col-md-4.nopadding
-								.row-fluid
-									ul.list
-										li
-											h2.blue-steelblue Services
-										li.full
-											a(href='https://tharris5.lab.novell.com', target='_blank') PAM Admin
-										li.full
-											a(href='https://tharris5.lab.novell.com/myaccess/', target='_blank') PAM MyAccess
-										li.full
-											a(href='https://tharris16.lab.novell.com/admin', target='_blank') AAF
-										li.full
-											a(href='https://tharris6.lab.novell.com:8443/nps/servlet/portal', target='_blank') iManager
-										li.full
-											a.ripplelink(href='https://tharris14.lab.novell.com/nps', target='_blank') NAM
-										li.full
-											a.ripplelink(href='http://novprvwin0569.provo.novell.com:8080/administrator', target='_blank') Knova Admin prod
-										li.full
-											a.ripplelink(href='http://prvknovas02.provo.novell.com/administrator/adminindex.do', target='_blank') Knova Admin staging
+		.row
+			.col-md-12.col-lg-5
+				#accordion.panel-group
+					.panel.panel-default
+						.panel-heading
+							a.accordion-toggle(data-toggle='collapse', href='#collapseOne' aria-expanded="true" aria-controls="collapseOne")
+								i.fa.fa-home
+								h3 tharris
+							a.install.pull-right(href='files/workPluginsTyler.zip')
+								i.fa.fa-cloud-download
+						#collapseOne.panel-collapse.collapse.in
+							.panel-body
+								.col-md-4.nopadding
+									.row-fluid
+										ul.list
+											li
+												h2.blue-steelblue Services
+											li.full
+												a(href='https://tharris5.lab.novell.com', target='_blank') PAM Admin
+											li.full
+												a(href='https://tharris5.lab.novell.com/myaccess/', target='_blank') PAM MyAccess
+											li.full
+												a(href='https://tharris16.lab.novell.com/admin', target='_blank') AAF
+											li.full
+												a(href='https://tharris6.lab.novell.com:8443/nps/servlet/portal', target='_blank') iManager
+											li.full
+												a.ripplelink(href='https://tharris14.lab.novell.com/nps', target='_blank') NAM
+											li.full
+												a.ripplelink(href='http://novprvwin0569.provo.novell.com:8080/administrator', target='_blank') Knova Admin prod
+											li.full
+												a.ripplelink(href='http://prvknovas02.provo.novell.com/administrator/adminindex.do', target='_blank') Knova Admin staging
+												
+								.col-md-8.nopadding
+									//- TOP-ROW Section
+									.row-fluid
+										.col-md-4.nopadding
+											ul.list
+												li(style='list-style: none; display: inline')
+													h2.purple-honeyflower tharris2
+												li.full
+													a(href='ssh://root@tharris2.lab.novell.com') ESXi
+											ul.list
+												li(style='list-style: none; display: inline')
+													h2.black Remote Access
+												li.full
+													a(href='ssh://root@tharris14.lab.novell.com') t14: NAM
+												li.full
+													a(href='ssh://tharris@tharris15.lab.novell.com') t15: ubu-dev prod
+										.col-md-4.nopadding
+											ul.list
+												li
+													h2.red-chesnutrose tharris3
+												li.full
+													a(href='ssh://root@tharris3.lab.novell.com') ESXi
+											ul.list
+												li
+													h2.black Remote Access
+												li.row
+													a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris1.lab.novell.com') t1: ubu-dev
+												li.row
+													a.col-md-10.col-xs-10(href='ssh://root@tharris5.lab.novell.com') t5: sles11-manager
+													a.col-md-2.col-xs-2(href='vnc://tharris5.lab.novell.com:5901')
+														i.center.fa.fa-laptop
+												li.row
+													a.col-md-10.col-xs-10(href='ssh://root@tharris6.lab.novell.com') t6: sles11-idm
+													a.col-md-2.col-xs-2(href='vnc://tharris6.lab.novell.com:5901')
+														i.fa.fa-laptop
+												li.row
+													a.col-md-10.col-xs-10(href='ssh://root@tharris7.lab.novell.com') t7: sles12
+													a.col-md-2.col-xs-2(href='vnc://tharris7.lab.novell.com:5901')
+														i.fa.fa-laptop
+												li.row
+													a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris10.lab.novell.com') t10: redhat6
+												li.row
+													a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris11.lab.novell.com') t11: redhat7
+												//- li.row
+												//- 	a.col-md-10.col-xs-10(href='ssh://root@tharris12.lab.novell.com') t12: sles11-idm
+												//- 	a.col-md-2.col-xs-2(href='vnc://tharris12.lab.novell.com:5901')
+												//- 		i.fa.fa-laptop
+												//- li.row
+												//- 	a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris13.lab.novell.com') t13: aix7
+										.col-md-4.nopadding
+											ul.list
+												li(style='list-style: none; display: inline')
+													h2.green-jade tharris4
+												//- purple-honeyflower,  green-jade, green-emerald
+												li.full
+													a(href='ssh://root@tharris4.lab.novell.com') ESXi
+												//- li.full
+												//- 	a(href='https://dchenworth8.lab.novell.com:8006', target='_blank') vSphere WebClient
+											ul.list
+												li(style='list-style: none; display: inline')
+													h2.black Remote Access
+												li.row
+													a.col-md-10.col-xs-10(href='rdp-tdh://t8.rdp') t8: win2008
+													a.col-md-2.col-xs-2(href='rdp-tdh://t8.RDP')
+														i.fa.fa-laptop
+												li.row
+													a.col-md-10.col-xs-10(href='rdp-tdh://t9.rdp') t9: win2012
+													a.col-md-2.col-xs-2(href='rdp-tdh://t9.RDP')
+														i.fa.fa-laptop
+
+
+
+									//- REMOTE ACCESS Section
+									//- .row-fluid		
+									//- 	.col-md-6.nopadding
 											
-							.col-md-8.nopadding
-								//- TOP-ROW Section
-								.row-fluid
-									.col-md-4.nopadding
-										ul.list
-											li(style='list-style: none; display: inline')
-												h2.purple-honeyflower tharris2
-											li.full
-												a(href='ssh://root@tharris2.lab.novell.com') ESXi
-										ul.list
-											li(style='list-style: none; display: inline')
-												h2.black Remote Access
-											li.full
-												a(href='ssh://root@tharris14.lab.novell.com') t14: NAM
-											li.full
-												a(href='ssh://root@tharris15.lab.novell.com') t15: ubu-dev prod
-									.col-md-4.nopadding
-										ul.list
-											li
-												h2.red-chesnutrose tharris3
-											li.full
-												a(href='ssh://root@tharris3.lab.novell.com') ESXi
-										ul.list
-											li
-												h2.black Remote Access
-											li.row
-												a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris1.lab.novell.com') t1: ubu-dev
-											li.row
-												a.col-md-10.col-xs-10(href='ssh://root@tharris5.lab.novell.com') t5: sles11-manager
-												a.col-md-2.col-xs-2(href='vnc://tharris5.lab.novell.com:5901')
-													i.center.fa.fa-laptop
-											li.row
-												a.col-md-10.col-xs-10(href='ssh://root@tharris6.lab.novell.com') t6: sles11-idm
-												a.col-md-2.col-xs-2(href='vnc://tharris6.lab.novell.com:5901')
-													i.fa.fa-laptop
-											li.row
-												a.col-md-10.col-xs-10(href='ssh://root@tharris7.lab.novell.com') t7: sles12
-												a.col-md-2.col-xs-2(href='vnc://tharris7.lab.novell.com:5901')
-													i.fa.fa-laptop
-											li.row
-												a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris10.lab.novell.com') t10: redhat6
-											li.row
-												a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris11.lab.novell.com') t11: redhat7
-											//- li.row
-											//- 	a.col-md-10.col-xs-10(href='ssh://root@tharris12.lab.novell.com') t12: sles11-idm
-											//- 	a.col-md-2.col-xs-2(href='vnc://tharris12.lab.novell.com:5901')
-											//- 		i.fa.fa-laptop
-											//- li.row
-											//- 	a.col-lg-12.col-md-12.col-sm-12.col-xs-12(href='ssh://root@tharris13.lab.novell.com') t13: aix7
-									.col-md-4.nopadding
-										ul.list
-											li(style='list-style: none; display: inline')
-												h2.green-jade tharris4
-											//- purple-honeyflower,  green-jade, green-emerald
-											li.full
-												a(href='ssh://root@tharris4.lab.novell.com') ESXi
-											//- li.full
-											//- 	a(href='https://dchenworth8.lab.novell.com:8006', target='_blank') vSphere WebClient
-										ul.list
-											li(style='list-style: none; display: inline')
-												h2.black Remote Access
-											li.row
-												a.col-md-10.col-xs-10(href='rdp-tdh://t8.rdp') t8: win2008
-												a.col-md-2.col-xs-2(href='rdp-tdh://t8.RDP')
-													i.fa.fa-laptop
-											li.row
-												a.col-md-10.col-xs-10(href='rdp-tdh://t9.rdp') t9: win2012
-												a.col-md-2.col-xs-2(href='rdp-tdh://t9.RDP')
-													i.fa.fa-laptop
+									//- 	.col-md-6.nopadding
+				
+			//- Queue
+			.col-sm-12.col-lg-7
+				#accordion1.panel-group
+					.panel.panel-default
+						.panel-heading
+							a.accordion-toggle(data-toggle='collapse' data-target="#queue" href='#queue')
+								i.fa.fa-hourglass-half
+								h3 Wallboard
+							a.install.pull-right(href='https://tharris7.lab.novell.com:8443/1.php', target='_blank')
+								i.fa.fa-external-link-square
+						#queue.panel-collapse.collapse.in
+							.panel-body.wallboard-panel
+								iframe(sandbox='allow-same-origin allow-scripts allow-popups allow-forms', seamless='seamless', src='https://tharris7.lab.novell.com:8443/1.php')
 
+		.row
+			//- TID Feed
+			.col-md-12.col-lg-5
+				#accordion2.panel-group
+					.panel.panel-default
+						.panel-heading
+							a.accordion-toggle(data-toggle='collapse' data-target="#tidFeed" href='#tidFeed')
+								i.fa.fa-feed
+								h3 Recent KB Articles
+						#tidFeed.panel-collapse.collapse.in
+							.panel-body.wallboard-panel
+								feed(summary="true" url="https://www.novell.com/newsfeeds/rss/tids/tids_pum.xml" count="15" template-url="templates/feed-kb-articles.html")
 
-
-								//- REMOTE ACCESS Section
-								//- .row-fluid		
-								//- 	.col-md-6.nopadding
-										
-								//- 	.col-md-6.nopadding
-			
-		//- Queue
-		.col-sm-12.col-lg-7
-			#accordion1.panel-group
-				.panel.panel-default
-					.panel-heading
-						a.accordion-toggle(data-toggle='collapse' data-target="#queue" href='#queue')
-							i.fa.fa-hourglass-half
-							h3 Wallboard
-							i.glyphicon.glyphicon-chevron-down.pull-right
-						a.install.pull-right(href='https://tharris7.lab.novell.com:8443/1.php', target='_blank')
-							i.fa.fa-external-link-square
-					#queue.panel-collapse.collapse.in
-						.panel-body.wallboard-panel
-							iframe(sandbox='allow-same-origin allow-scripts allow-popups allow-forms', seamless='seamless', src='https://tharris7.lab.novell.com:8443/1.php')
-
-		//- TID Feed
-		.col-md-12.col-lg-5
-			#accordion2.panel-group
-				.panel.panel-default
-					.panel-heading
-						a.accordion-toggle(data-toggle='collapse' data-target="#tidFeed" href='#tidFeed')
-							i.fa.fa-feed
-							h3 Recent KB Articles
-							i.glyphicon.glyphicon-chevron-down.pull-right
-					#tidFeed.panel-collapse.collapse.in
-						.panel-body.wallboard-panel
-							feed(summary="true" url="https://www.novell.com/newsfeeds/rss/tids/tids_pum.xml" count="15" template-url="templates/feed-kb-articles.html")
-
-		//- Forums Feed https://forums.novell.com/external.php?type=RSS2&forumids=1340
-		.col-sm-12.col-lg-7
-			#accordion3.panel-group
-				.panel.panel-default
-					.panel-heading
-						a.accordion-toggle(data-toggle='collapse' data-target="#forumFeed" href='#forumFeed')
-							i.fa.fa-feed
-							h3 Recent Forum Posts
-							i.glyphicon.glyphicon-chevron-down.pull-right
-					#forumFeed.panel-collapse.collapse.in
-						.panel-body.wallboard-panel
-							feed(url="https://forums.novell.com/external.php?type=RSS2&forumids=1340" template-url="templates/feed-forum-post.html" summary="true")
+			//- Forums Feed https://forums.novell.com/external.php?type=RSS2&forumids=1340
+			.col-sm-12.col-lg-7
+				#accordion3.panel-group
+					.panel.panel-default
+						.panel-heading
+							a.accordion-toggle(data-toggle='collapse' data-target="#forumFeed" href='#forumFeed')
+								i.fa.fa-feed
+								h3 Recent Forum Posts
+						#forumFeed.panel-collapse.collapse.in
+							.panel-body.wallboard-panel
+								feed(url="https://forums.novell.com/external.php?type=RSS2&forumids=1340" template-url="templates/feed-forum-post.html" summary="true")
 
 		//- Bug Feed
 		//- .col-sm-12.col-lg-7
@@ -168,7 +166,6 @@ block content
 						a.accordion-toggle(data-toggle='collapse' data-target="#tidFeed" href='#tidFeed')
 							i.fa.fa-feed
 							h3 NPAM Recent Bugs
-							i.glyphicon.glyphicon-chevron-down.pull-right
 					#tidFeed.panel-collapse.collapse.in
 						.panel-body.wallboard-panel
 							feed(url="ftp://ftp.tdharris.com/outgoing/bugs2.xml")
@@ -182,7 +179,6 @@ block content
 						a.accordion-toggle(data-toggle='collapse', href='#prodQueue')
 							i.fa.fa-hourglass-half
 							h3 Prod Queue
-							i.glyphicon.glyphicon-chevron-down.pull-right
 						a.install.pull-right(href='https://prod11i.innerweb.novell.com/pls/apex/f?p=125:5001:31166590036566::NO:RP::', target='_blank')
 							i.fa.fa-external-link-square
 					#prodQueue.panel-collapse.collapse.in
