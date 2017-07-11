@@ -1,5 +1,5 @@
-<ul id="forum-posts" class="media-list">
-    <li ng-repeat="feed in feeds | orderBy:publishedDate:reverse" class="media item">
+<ul id="forum-posts" class="list-group">
+    <a class="list-group-item" target="_new" href="{{feed.link}}" ng-repeat="feed in feeds | orderBy:publishedDate:reverse">
         <div class="media-body">
             <a target="_new" href="{{feed.link}}">
                 <div class="row">
@@ -12,6 +12,5 @@
                 </div>
             </a>
         </div>
-        <!-- ngIf: !$last --><hr ng-if="!$last" class="ng-scope"><!-- end ngIf: !$last -->
-    </li>
+    </a>
 </ul>
