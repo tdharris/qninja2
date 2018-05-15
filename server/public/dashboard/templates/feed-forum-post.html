@@ -1,16 +1,12 @@
 <ul id="forum-posts" class="list-group">
-    <a class="list-group-item" target="_new" href="{{feed.link}}" ng-repeat="feed in feeds | orderBy:publishedDate:reverse">
-        <div class="media-body">
-            <a target="_new" href="{{feed.link}}">
-                <div class="row">
-                    <p class="media-date pull-right">{{feed.publishedDate | date}}</p>
-                    <p class="media-heading" ng-bind-html="feed.title"></p>
-                </div>
-                <div class="row">
-                    <p class="media-author pull-right">- {{feed.author}}</p>
-                    <p class="media-summary" ng-bind-html="!summary ? feed.content : feed.contentSnippet"></p>
-                </div>
-            </a>
-        </div>
-    </a>
+
+	<p ng-bind-html="feeds">{{feeds}}</p>
+	<p ng-bind-html="feeds.length">{{feeds.length}}</p>
+	
+	<a class="list-group-item" target="_new" href="{{feed.link}}" ng-repeat="feed in feeds | orderBy:pubDate:reverse">
+	    <div class="media-body">
+            <p class="media-heading" ng-bind-html="feed.title"></p>
+        </div>      
+	</a>
+    
 </ul>

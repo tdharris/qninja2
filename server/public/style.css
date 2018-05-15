@@ -1,0 +1,25 @@
+
+#kb-article-metadata li .docid {
+    font-size: 30px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+#kb-article-metadata li {
+    font-weight: normal;
+    font-style: normal;
+    padding: 7px 0 10px 0;
+    font-size: 18px;
+}
+
+#content h3 {
+    font-size: 18px;
+    margin: 0 0 12px 0;
+    padding: 24px 0 2px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+body {
+    font-size: 16px;
+}
+
