@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "tharris",
@@ -12,6 +13,7 @@
     "async": "^1.4.2",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
+    "dotenv": "^6.1.0",
     "express": "~4.13.3",
     "express-api-helper": "0.0.5",
     "jade": "^1.11.0",

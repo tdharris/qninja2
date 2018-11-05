@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express'),
     app = module.exports = express(),
     bodyParser = require('body-parser'),
@@ -22,20 +24,32 @@ app.set('view engine', 'jade')
 // include router
 require('./lib/router')(app);
 
-// Start server: redirect http to https
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80, function(){
-  logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
-});
-https.createServer({
-    key: fs.readFileSync('./lib/ssl/lab/godaddy.nopass.key'),
-    cert: fs.readFileSync('./lib/ssl/lab/godaddy.pem')
-    //requestCert: false,
-    //rejectUnauthorized: false
-    //pfx: fs.readFileSync('./lib/ssl/lab.pfx'),
-    //passphrase: 'novell'
-}, app).listen(443, function() {
-	logme.info('[qninja] is listening at https://'+this.address().address+':'+this.address().port);
-});
+// Start server
+if (process.env.NODE_ENV === 'httpOnly') {
+
+    app.listen(80, function(){
+      logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
+    });
+
+} else {
+
+    // Start server: redirect http to https
+    http.createServer(function (req, res) {
+        res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+        res.end();
+    }).listen(80, function(){
+      logme.info('[qninja] is listening at http://'+this.address().address+':'+this.address().port);
+    });
+
+    https.createServer({
+        key: fs.readFileSync('./lib/ssl/lab/godaddy.nopass.key'),
+        cert: fs.readFileSync('./lib/ssl/lab/godaddy.pem')
+        //requestCert: false,
+        //rejectUnauthorized: false
+        //pfx: fs.readFileSync('./lib/ssl/lab.pfx'),
+        //passphrase: 'novell'
+    }, app).listen(443, function() {
+    	logme.info('[qninja] is listening at https://'+this.address().address+':'+this.address().port);
+    });
+
+}

@@ -1,3 +1,6 @@
+.env*
+!.env*.example
+
 # Logs
 logs
 *.log
@@ -32,3 +35,4 @@ bower_components
 *.pem
 *.crt
 *.csr
+*.pfx
