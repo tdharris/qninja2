@@ -6,6 +6,17 @@ Internal app for NTS Engineers to help automate workflow.
 <li>Notify: Queue monitor subscription service for text/email notifications</li>
 <li>BugZilla-Update: Pull from /incoming or /outgoing and attach to bug# or upload to external FTP</li>
 </ul>
+
+### Docker install steps:
+1. Install pre-requisites:
+    - `Docker`: https://docs.docker.com/install/
+    - `git`: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+2. Download repository: `git clone https://github.com/tdharris/qninja2.git && cd qninja2`
+3. Build docker image: `docker build -t tdharris/qninja`
+4. Run docker image as container: `docker run --name qninja -e NODE_ENV=prod -p 80:80 -p 443:443 tdharris/qninja`
+*Note: Change `NODE_END` to `httpOnly` if only needing port 80 inside the container and drop `-p 443:443` route.*
+<br/>*Note: By default, `prod` runs both port `80/443` and routes `80` to `443`*
+
 ### qManagement
 Engineer’s workload management web app built with AngularJS, NodeJS and ExpressJS.
 
