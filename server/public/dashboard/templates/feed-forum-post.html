@@ -5,7 +5,7 @@
 	
 	<a class="list-group-item" target="_new" href="{{feed.link}}" ng-repeat="feed in feeds | orderBy:pubDate:reverse">
 	    <div class="media-body">
-            <p class="media-heading" ng-bind-html="feed.title"></p>
+            <p class="media-heading" ng-bind-html="feed.title">{{feed}}</p>
         </div>      
 	</a>
     
