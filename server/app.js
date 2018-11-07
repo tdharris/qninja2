@@ -42,8 +42,8 @@ if (process.env.NODE_ENV === 'httpOnly') {
     });
 
     https.createServer({
-        key: fs.readFileSync('./lib/ssl/lab/godaddy.nopass.key'),
-        cert: fs.readFileSync('./lib/ssl/lab/godaddy.pem')
+        key: fs.readFileSync(process.env.SSL_PRIVATE_KEY),
+        cert: fs.readFileSync(process.env.SSL_PUBLIC_PEM)
         //requestCert: false,
         //rejectUnauthorized: false
         //pfx: fs.readFileSync('./lib/ssl/lab.pfx'),
