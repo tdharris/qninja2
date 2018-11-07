@@ -16,7 +16,7 @@ Internal app for NTS Engineers to help automate workflow.
 4. Run docker image as container: 
 <br/>*Note: mounting in `./server/views` directory in order to modify html page and restart container.*
     - Listen on ports 80 & 443 and redirect to 443:
-    <br/>`docker run --name qninja -e NODE_ENV=prod -v <path-to-src-views>:/app/views -p 80:80 -p 443:443 -d tdharris/qninja`
+    <br/>`docker run --name qninja -v <path-to-env>:/app/.env -v <path-to-crt>:/app/crt -v <path-to-src-views>:/app/views -p 80:80 -p 443:443 tdharris/qninja`
     - Listen on port 80 only:
     <br/>`docker run --name qninja -e NODE_ENV=httpOnly -v <path-to-src-views>:/app/views -p 80:80 -d tdharris/qninja`
 
